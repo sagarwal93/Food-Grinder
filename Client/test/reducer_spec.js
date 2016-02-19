@@ -17,7 +17,7 @@ describe('reducer', () => {
       clientId: '1234'
     }));
   });
-  
+
   it('handles SET_STATE', () => {
     const initialState = Map();
     const action = {
