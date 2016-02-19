@@ -10,11 +10,11 @@ describe('store', () => {
     expect(store.getState()).to.equal(Map());
 
     store.dispatch({
-      type: 'SET_ENTRIES',
-      entries: ['Trainspotting', '28 Days Later']
+      type: 'SET_ORDERS',
+      orders: [{id:1, name:'Pizza'}, {id:2, name:'Salad'}]
     });
     expect(store.getState()).to.equal(fromJS({
-      entries: ['Trainspotting', '28 Days Later']
+      orders: [{id:1, name:'Pizza'}, {id:2, name:'Salad'}]
     }));
   });
 

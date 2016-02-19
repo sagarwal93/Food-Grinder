@@ -5,7 +5,7 @@ export const store = makeStore();
 startServer(store);
 
 store.dispatch({
-  type: 'SET_ENTRIES',
-  orders: require('./orders.json')
+  type: 'SET_ORDERS',
+  entries: require('./orders.json')
 });
-store.dispatch({type: 'NEXT'});
+// store.dispatch({type: 'NEXT'});
