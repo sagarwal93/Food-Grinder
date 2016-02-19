@@ -15,7 +15,7 @@ export const ConnectionState = React.createClass({
     return <div className="connectionState"
                 style={{display: this.isVisible() ? 'block' : 'none'}}>
       {this.getMessage()}
-    </div>
+    </div>;
   }
 });
 

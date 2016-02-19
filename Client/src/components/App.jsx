@@ -6,6 +6,6 @@ export default React.createClass({
     return <div>
       <ConnectionStateContainer />
       {this.props.children}
-    </div>
+    </div>;
   }
 });
