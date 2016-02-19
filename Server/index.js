@@ -6,6 +6,6 @@ startServer(store);
 
 store.dispatch({
   type: 'SET_ENTRIES',
-  entries: require('./entries.json')
+  orders: require('./orders.json')
 });
 store.dispatch({type: 'NEXT'});

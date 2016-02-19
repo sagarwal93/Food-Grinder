@@ -11,6 +11,7 @@ import getClientId from './client_id';
 import App from './components/App';
 import {VotingContainer} from './components/Voting';
 import {ResultsContainer} from './components/Results';
+import {OrdersContainer} from './components/Orders';
 
 require('./style.css');
 
@@ -39,6 +40,7 @@ store.dispatch(setClientId(getClientId()));
 const routes = <Route component={App}>
   <Route path="/" component={VotingContainer} />
   <Route path="/results" component={ResultsContainer} />
+  <Route path="/orders" component={OrdersContainer} />
 </Route>;
 
 ReactDOM.render(
