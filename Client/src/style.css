@@ -1,7 +1,9 @@
 body {
   font-family: 'Open Sans', sans-serif;
-  background-color: #673AB7;
-  color: white;
+  background-color: #F5f5f5;
+  color: #343434;
+  margin: 0px;
+  padding: 1%;
 }
 
 /* Voting Screen */

@@ -41,7 +41,7 @@ export default function(state = Map(), action) {
   case 'SET_CONNECTION_STATE':
     return setConnectionState(state, action.state, action.connected);
   case 'SET_STATE':
-    return resetVote(setState(state, action.state));
+    return setState(state, action.state);
   case 'VOTE':
     return vote(state, action.entry);
   }

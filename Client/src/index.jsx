@@ -16,9 +16,11 @@ import {OrdersContainer} from './components/Orders';
 require('./style.css');
 
 const socket = io(`${location.protocol}//${location.hostname}:8090`);
-socket.on('state', state =>
-  store.dispatch(setState(state))
+socket.on('state', state => {
+    store.dispatch(setState(state));
+  }
 );
+
 [
   'connect',
   'connect_error',
