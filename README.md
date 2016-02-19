@@ -6,7 +6,7 @@ You'll know it when you see it.
 `npm install`
 
 #### Client
-Normal `npm install` and plus a specific version of react-router:
+Normal `npm install`, plus a specific version of react-router:
 `npm install --save react-router@1.0.0-rc3`
 Recommend: `npm install -g webpack webpack-dev-server`
 
