@@ -2,13 +2,8 @@
 You'll know it when you see it.
 
 ### Installation
-#### Server
-`npm install`
-
-#### Client
-Normal `npm install`, plus a specific version of react-router:
-`npm install --save react-router@1.0.0-rc3`
-Recommend: `npm install -g webpack webpack-dev-server`
+#### Server and Client
+A simple `npm install` is all that is needed.
 
 ### Running
 #### Server
@@ -16,3 +11,5 @@ Recommend: `npm install -g webpack webpack-dev-server`
 
 #### Client
 `webpack-dev-server`
+
+Once both the client and server are running visiting http://localhost:8080/#/orders should return a list of orders.
