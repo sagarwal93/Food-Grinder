@@ -6,7 +6,7 @@ import reducer from '../src/reducer';
 describe('reducer', () => {
 
   it('handles SET_CLIENT_ID', () => {
-    const initialState = Map();
+    const initialState = new Map();
     const action = {
       type: 'SET_CLIENT_ID',
       clientId: '1234'
@@ -19,20 +19,14 @@ describe('reducer', () => {
   });
 
   it('handles SET_STATE', () => {
-    const initialState = Map();
+    const initialState = new Map();
     const action = {
       type: 'SET_STATE',
-      state: Map({
-        orders: List.of(
-          Map({
-            id: 1,
-            name: 'Pi'
-          }),
-          Map({
-            id: 2,
-            name: 'Sal'
-          })
-        )
+      state: fromJS({
+        orders: [
+          {id: 1, name: 'Pizza'},
+          {id: 2, name: 'Salad'}
+        ]
       })
     };
 
@@ -40,20 +34,20 @@ describe('reducer', () => {
 
     expect(nextState).to.equal(fromJS({
       orders: [
-        {id: 1, name: 'Pi'},
-        {id: 2, name: 'Sal'}
+        {id: 1, name: 'Pizza'},
+        {id: 2, name: 'Salad'}
       ]
     }));
   });
 
   it('handles SET_STATE with plain JS payload', () => {
-    const initialState = Map();
+    const initialState = new Map();
     const action = {
       type: 'SET_STATE',
       state: {
         orders: [
-          {id: 1, name: 'Pi'},
-          {id: 2, name: 'Sal'}
+          {id: 1, name: 'Pizza'},
+          {id: 2, name: 'Salad'}
         ]
       }
     };
@@ -61,8 +55,8 @@ describe('reducer', () => {
 
     expect(nextState).to.equal(fromJS({
       orders: [
-        {id: 1, name: 'Pi'},
-        {id: 2, name: 'Sal'}
+        {id: 1, name: 'Pizza'},
+        {id: 2, name: 'Salad'}
       ]
     }));
   });
@@ -72,8 +66,8 @@ describe('reducer', () => {
       type: 'SET_STATE',
       state: {
         orders: [
-          {id: 1, name: 'Pi'},
-          {id: 2, name: 'Sal'}
+          {id: 1, name: 'Pizza'},
+          {id: 2, name: 'Salad'}
         ]
       }
     };
@@ -81,8 +75,8 @@ describe('reducer', () => {
 
     expect(nextState).to.equal(fromJS({
       orders: [
-        {id: 1, name: 'Pi'},
-        {id: 2, name: 'Sal'}
+        {id: 1, name: 'Pizza'},
+        {id: 2, name: 'Salad'}
       ]
     }));
   });
