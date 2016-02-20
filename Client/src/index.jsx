@@ -1,8 +1,8 @@
-import React from 'react';
+import React from 'react'; //eslint-disable-line
 import ReactDOM from 'react-dom';
-import {Router, Route, hashHistory} from 'react-router';
+import {Router, Route, hashHistory} from 'react-router'; //eslint-disable-line
 import {createStore, applyMiddleware} from 'redux';
-import {Provider} from 'react-redux';
+import {Provider} from 'react-redux'; //eslint-disable-line
 import io from 'socket.io-client';
 import reducer from './reducer';
 import {setClientId, setState, setConnectionState} from './action_creators';
@@ -13,12 +13,13 @@ import {VotingContainer} from './components/Voting';
 import {ResultsContainer} from './components/Results';
 import {OrdersContainer} from './components/Orders';
 
+
 require('./style.css');
 
 const socket = io(`${location.protocol}//${location.hostname}:8090`);
 socket.on('state', state => {
-    store.dispatch(setState(state));
-  }
+    store.dispatch(setState(state)); //eslint-disable-line
+}
 );
 
 [
@@ -30,7 +31,7 @@ socket.on('state', state => {
   'reconnect_error',
   'reconnect_failed'
 ].forEach(ev =>
-  socket.on(ev, () => store.dispatch(setConnectionState(ev, socket.connected)))
+  socket.on(ev, () => store.dispatch(setConnectionState(ev, socket.connected))) //eslint-disable-line
 );
 
 const createStoreWithMiddleware = applyMiddleware(
@@ -43,6 +44,7 @@ const routes = <Route component={App}>
   <Route path="/" component={VotingContainer} />
   <Route path="/results" component={ResultsContainer} />
   <Route path="/orders" component={OrdersContainer} />
+  <Route path="/currentOrder" component={OrdersContainer} />
 </Route>;
 
 ReactDOM.render(

@@ -1,7 +1,7 @@
 import React from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import {connect} from 'react-redux';
-import Winner from './Winner';
+import Winner from './Winner'; //eslint-disable-line
 import * as actionCreators from '../action_creators';
 
 export const VOTE_WIDTH_PERCENT = 8;

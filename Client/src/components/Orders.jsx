@@ -1,12 +1,12 @@
-import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
+import {connect} from 'react-redux';
 
 import * as actionCreators from '../action_creators';
 
 export const Orders = React.createClass({
   render () {
     const {orders} = this.props;
-    //console.log(JSON.stringify(orders));
+    // console.log(JSON.stringify(orders));
     return orders ?
       <div>
         {

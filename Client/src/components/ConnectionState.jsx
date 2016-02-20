@@ -21,5 +21,5 @@ export const ConnectionState = React.createClass({
 
 
 export const ConnectionStateContainer = connect(
-  state => state.get('connection', Map()).toJS()
+  state => state.get('connection', new Map()).toJS()
 )(ConnectionState);
