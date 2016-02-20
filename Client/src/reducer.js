@@ -34,6 +34,17 @@ function resetVote(state) {
   }
 }
 
+function setCurrentOrder(state) {
+  const orders = state.get('orders');
+  if(!orders || orders.count() === 0) {
+    return state;
+  }
+  return state.merge({
+    currentOrder: orders.first(),
+    orders: orders.skip(1)
+  });
+}
+
 export default function(state = Map(), action) {
   switch (action.type) {
   case 'SET_CLIENT_ID':
@@ -42,6 +53,8 @@ export default function(state = Map(), action) {
     return setConnectionState(state, action.state, action.connected);
   case 'SET_STATE':
     return setState(state, action.state);
+  case 'SET_CURRENT_ORDER':
+      return setCurrentOrder(state);
   case 'VOTE':
     return vote(state, action.entry);
   }
