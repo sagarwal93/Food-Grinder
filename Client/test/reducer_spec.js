@@ -71,7 +71,7 @@ describe('reducer', () => {
         ]
       }
     };
-    const nextState = reducer(undefined, action);
+    const nextState = reducer(undefined, action); //eslint-disable-line
 
     expect(nextState).to.equal(fromJS({
       orders: [
