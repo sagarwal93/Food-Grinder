@@ -1,33 +1,24 @@
 import React from 'react';
 import {connect} from 'react-redux';
-
+import OrderCurrent from './OrderCurrent'; //eslint-disable-line
+import OrderList from './OrderList'; //eslint-disable-line
 import * as actionCreators from '../action_creators';
 
 export const Orders = React.createClass({
   render () {
-    const {orders} = this.props;
-    // console.log(JSON.stringify(orders));
-    return orders ?
+    return (
       <div>
-        {
-          orders.map((order) => {
-            const currOrder = order.toJS();
-            return <div key={currOrder.id}>
-                <span>
-                  {currOrder.name}
-                </span>
-              </div>;
-          })
-        }
+        <OrderList {...this.props} />
+        <OrderCurrent currentOrder={this.props.currentOrder} />
       </div>
-      :
-      <div> Nothing here! </div>;
+    );
   }
 });
 
 function mapStateToProps(state) {
   return {
-    orders: state.getIn(['orders'])
+    orders: state.getIn(['orders']),
+    currentOrder: state.get('currentOrder')
   };
 }
 

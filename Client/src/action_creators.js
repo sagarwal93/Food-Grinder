@@ -20,6 +20,12 @@ export function setState(state) {
   };
 }
 
+export function setCurrentOrder() {
+  return {
+    type: 'SET_CURRENT_ORDER'
+  };
+}
+
 export function vote(entry) {
   return {
     meta: {remote: true},

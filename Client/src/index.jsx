@@ -44,7 +44,6 @@ const routes = <Route component={App}>
   <Route path="/" component={VotingContainer} />
   <Route path="/results" component={ResultsContainer} />
   <Route path="/orders" component={OrdersContainer} />
-  <Route path="/currentOrder" component={OrdersContainer} />
 </Route>;
 
 ReactDOM.render(

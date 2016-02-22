@@ -1,4 +1,5 @@
 import {Map} from 'immutable';
+import {defaultState} from './default_state';
 
 function setConnectionState(state, connectionState, connected) {
   return state.set('connection', new Map({
@@ -43,7 +44,7 @@ function setCurrentOrder(state) {
   return state;
 }
 
-export default function(state = new Map(), action) {
+export default function(state = defaultState, action) {
   switch (action.type) {
     case 'SET_CLIENT_ID':
       return state.set('clientId', action.clientId);
