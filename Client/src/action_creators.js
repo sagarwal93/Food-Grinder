@@ -20,9 +20,9 @@ export function setState(state) {
   };
 }
 
-export function setCurrentOrder() {
+export function nextOrder() {
   return {
-    type: 'SET_CURRENT_ORDER'
+    type: 'NEXT_ORDER'
   };
 }
 

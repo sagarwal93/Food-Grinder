@@ -33,7 +33,7 @@ function vote(state, entry) {
 //   return state;
 // }
 
-function setCurrentOrder(state) {
+function nextOrder(state) {
   const orders = state.get('orders');
   if (orders && orders.count() >= 1) {
     return state.merge({
@@ -52,8 +52,8 @@ export default function(state = defaultState, action) {
       return setConnectionState(state, action.state, action.connected);
     case 'SET_STATE':
       return setState(state, action.state);
-    case 'SET_CURRENT_ORDER':
-      return setCurrentOrder(state);
+    case 'NEXT_ORDER':
+      return nextOrder(state);
     case 'VOTE':
       return vote(state, action.entry);
     default:

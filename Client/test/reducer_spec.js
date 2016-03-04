@@ -1,4 +1,4 @@
-import {List, Map, fromJS} from 'immutable';
+import {Map, fromJS} from 'immutable';
 import {expect} from 'chai';
 
 import reducer from '../src/reducer';
@@ -77,7 +77,8 @@ describe('reducer', () => {
       orders: [
         {id: 1, name: 'Pizza'},
         {id: 2, name: 'Salad'}
-      ]
+      ],
+      currentOrder: {id: 0, name: 'The Default Current Order'}
     }));
   });
 
@@ -106,7 +107,7 @@ describe('reducer', () => {
     }));
   });
 
-  it('handles SET_CURRENT_ORDER', () => {
+  it('handles NEXT_ORDER', () => {
     const initialState = fromJS({
       orders: [
         {id: 1, name: 'Pizza'},
@@ -114,7 +115,7 @@ describe('reducer', () => {
       ]
     });
     const action = {
-      type: 'SET_CURRENT_ORDER'
+      type: 'NEXT_ORDER'
     };
 
     const nextState = reducer(initialState, action);
@@ -127,12 +128,12 @@ describe('reducer', () => {
     }));
   });
 
-  it('handles SET_CURRENT_ORDER without orders', () => {
+  it('handles NEXT_ORDER without orders', () => {
     const initialState = fromJS({
       orders: []
     });
     const action = {
-      type: 'SET_CURRENT_ORDER'
+      type: 'NEXT_ORDER'
     };
 
     const nextState = reducer(initialState, action);
@@ -142,11 +143,11 @@ describe('reducer', () => {
     }));
   });
 
-  it('handles SET_CURRENT_ORDER with undefined orders', () => {
+  it('handles NEXT_ORDER with undefined orders', () => {
     const initialState = fromJS({
     });
     const action = {
-      type: 'SET_CURRENT_ORDER'
+      type: 'NEXT_ORDER'
     };
 
     const nextState = reducer(initialState, action);
@@ -155,14 +156,14 @@ describe('reducer', () => {
     }));
   });
 
-  it('handles SET_CURRENT_ORDER with one order', () => {
+  it('handles NEXT_ORDER with one order', () => {
     const initialState = fromJS({
       orders: [
         {id: 1, name: 'Pizza'}
       ]
     });
     const action = {
-      type: 'SET_CURRENT_ORDER'
+      type: 'NEXT_ORDER'
     };
 
     const nextState = reducer(initialState, action);
