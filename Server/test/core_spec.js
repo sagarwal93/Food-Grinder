@@ -1,7 +1,7 @@
 import {List, Map, fromJS} from 'immutable';
 import {expect} from 'chai';
 
-import {setOrders, setCustomer, favoriteOrder} from '../src/core';
+import {setOrders, setCustomer, voteOrder} from '../src/core';
 
 describe('application logic', () => {
 
@@ -80,133 +80,52 @@ describe('application logic', () => {
 
   });
 
-  // describe('getCustomerOrders', () => {
-  //
-  //   it('returns the upcoming orders for a given a customer with no favorites', () => {
-  //     const orders = fromJS(
-  //       [{id: 1, name: 'Pizza'}, {id: 2, name: 'Salad'}, {id: 3, name: 'Cake'}]
-  //     );
-  //     const customer = fromJS({
-  //       id: 1, name: 'Brian'
-  //     });
-  //
-  //     expect(getCustomerOrders(orders, customer)).to.equal(fromJS({
-  //       suggestions: [{id: 1, name: 'Pizza'}, {id: 2, name: 'Salad'}, {id: 3, name: 'Cake'}]
-  //     }));
-  //   });
-  //
-  //   it('returns the favorite and upcoming orders for a given a customer with a single favorite', () => {
-  //     const orders = fromJS(
-  //       [{id: 1, name: 'Pizza'}, {id: 2, name: 'Salad'}, {id: 3, name: 'Cake'}]
-  //     );
-  //     const customer = fromJS({
-  //       id: 1, name: 'Brian', favorites: [2]
-  //     });
-  //
-  //     expect(getCustomerOrders(orders, customer)).to.equal(fromJS({
-  //       suggestions: [{id: 1, name: 'Pizza'}, {id: 3, name: 'Cake'}],
-  //       favorites: [{id: 2, name: 'Salad'}]
-  //     }));
-  //   });
-  //
-  //   it('returns the favorite and upcoming orders for a given a customer with multiple favorites', () => {
-  //     const orders = fromJS(
-  //       [{id: 1, name: 'Pizza'}, {id: 2, name: 'Salad'}, {id: 3, name: 'Cake'}]
-  //     );
-  //     const customer = fromJS({
-  //       id: 1, name: 'Brian', favorites: [1, 3]
-  //     });
-  //
-  //     expect(getCustomerOrders(orders, customer)).to.equal(fromJS({
-  //       suggestions: [{id: 2, name: 'Salad'}],
-  //       favorites: [{id: 1, name: 'Pizza'}, {id: 3, name: 'Cake'}]
-  //     }));
-  //   });
-  //
-  // });
+  describe('voteOrder', () => {
 
-  // describe('next', () => {
-  //
-  //   it('takes the next two entries under vote', () => {
-  //     const state = Map({
-  //       entries: List.of('Trainspotting', '28 Days Later', 'Sunshine')
-  //     });
-  //     const nextState = next(state);
-  //     expect(nextState).to.equal(Map({
-  //       vote: Map({
-  //         pair: List.of('Trainspotting', '28 Days Later')
-  //       }),
-  //       entries: List.of('Sunshine')
-  //     }));
-  //   });
-  //
-  //   it('puts winner of current vote back to entries', () => {
-  //     const state = Map({
-  //       vote: Map({
-  //         pair: List.of('Trainspotting', '28 Days Later'),
-  //         tally: Map({
-  //           'Trainspotting': 4,
-  //           '28 Days Later': 2
-  //         })
-  //       }),
-  //       entries: List.of('Sunshine', 'Millions', '127 Hours')
-  //     });
-  //     const nextState = next(state);
-  //     expect(nextState).to.equal(Map({
-  //       vote: Map({
-  //         pair: List.of('Sunshine', 'Millions')
-  //       }),
-  //       entries: List.of('127 Hours', 'Trainspotting')
-  //     }));
-  //   });
-  //
-  //   it('puts both from tied vote back to entries', () => {
-  //     const state = Map({
-  //       vote: Map({
-  //         pair: List.of('Trainspotting', '28 Days Later'),
-  //         tally: Map({
-  //           'Trainspotting': 3,
-  //           '28 Days Later': 3
-  //         })
-  //       }),
-  //       entries: List.of('Sunshine', 'Millions', '127 Hours')
-  //     });
-  //     const nextState = next(state);
-  //     expect(nextState).to.equal(Map({
-  //       vote: Map({
-  //         pair: List.of('Sunshine', 'Millions')
-  //       }),
-  //       entries: List.of('127 Hours', 'Trainspotting', '28 Days Later')
-  //     }));
-  //   });
-  //
-  //   it('marks winner when just one entry left', () => {
-  //     const state = Map({
-  //       vote: Map({
-  //         pair: List.of('Trainspotting', '28 Days Later'),
-  //         tally: Map({
-  //           'Trainspotting': 4,
-  //           '28 Days Later': 2
-  //         })
-  //       }),
-  //       entries: List()
-  //     });
-  //     const nextState = next(state);
-  //     expect(nextState).to.equal(Map({
-  //       winner: 'Trainspotting'
-  //     }));
-  //   });
-  //
-  // });
-  //
-  describe('favoriteOrder', () => {
+    it('ignores nonexistent customer', () => {
+      const state = fromJS({
+        orders: [{id: 1, name: 'Pizza', popularity: 9}, {id: 2, name: 'Salad', popularity: 3}, {id: 3, name: 'Cake'}]
+      });
+      const nextState = voteOrder(state, 1, 2, true);
+      expect(nextState).to.equal(
+        fromJS({
+          orders: [{id: 1, name: 'Pizza', popularity: 9}, {id: 2, name: 'Salad', popularity: 3}, {id: 3, name: 'Cake'}]
+        })
+      );
+    });
+
+    it('ignores incorrect customer ID', () => {
+      const state = fromJS({
+        orders: [{id: 1, name: 'Pizza', popularity: 9}, {id: 2, name: 'Salad', popularity: 3}, {id: 3, name: 'Cake'}],
+        customer: {id: 2, name: 'Les'}
+      });
+      const nextState = voteOrder(state, 1, 2, true);
+      expect(nextState).to.equal(
+        fromJS({
+          orders: [{id: 1, name: 'Pizza', popularity: 9}, {id: 2, name: 'Salad', popularity: 3}, {id: 3, name: 'Cake'}],
+          customer: {id: 2, name: 'Les'}
+        })
+      );
+    });
+
+    it('ignores/removes a nonexistent order', () => {
+      const state = fromJS({
+        customer: {id: 1, name: 'Brian', favorites: [2], rejections: [2, 3]}
+      });
+      const nextState = voteOrder(state, 1, 2, true);
+      expect(nextState).to.equal(
+        fromJS({
+          customer: {id: 1, name: 'Brian', favorites: [], rejections: [3]}
+        })
+      );
+    });
 
     it('favorites and upvotes an order when no favorites are set', () => {
       const state = fromJS({
         orders: [{id: 1, name: 'Pizza'}, {id: 2, name: 'Salad'}, {id: 3, name: 'Cake'}],
         customer: {id: 1, name: 'Brian'}
       });
-      const nextState = favoriteOrder(state, 1, 2);
+      const nextState = voteOrder(state, 1, 2, true);
       expect(nextState).to.equal(
         fromJS({
           orders: [{id: 1, name: 'Pizza'}, {id: 2, name: 'Salad', popularity: 1}, {id: 3, name: 'Cake'}],
@@ -220,7 +139,7 @@ describe('application logic', () => {
         orders: [{id: 1, name: 'Pizza', popularity: 9}, {id: 2, name: 'Salad', popularity: 3}, {id: 3, name: 'Cake'}],
         customer: {id: 1, name: 'Brian', favorites: [1]}
       });
-      const nextState = favoriteOrder(state, 1, 2);
+      const nextState = voteOrder(state, 1, 2, true);
       expect(nextState).to.equal(
         fromJS({
           orders: [{id: 1, name: 'Pizza', popularity: 9}, {id: 2, name: 'Salad', popularity: 4}, {id: 3, name: 'Cake'}],
@@ -229,12 +148,40 @@ describe('application logic', () => {
       );
     });
 
-    it('favorites and upvotes an order with duplicate', () => {
+    it('rejects and downvotes an order when no rejections are set', () => {
+      const state = fromJS({
+        orders: [{id: 1, name: 'Pizza'}, {id: 2, name: 'Salad'}, {id: 3, name: 'Cake'}],
+        customer: {id: 1, name: 'Brian'}
+      });
+      const nextState = voteOrder(state, 1, 2, false);
+      expect(nextState).to.equal(
+        fromJS({
+          orders: [{id: 1, name: 'Pizza'}, {id: 2, name: 'Salad', popularity: -1}, {id: 3, name: 'Cake'}],
+          customer: {id: 1, name: 'Brian', rejections: [2]}
+        })
+      );
+    });
+
+    it('rejects and downvotes an order when rejections are already set', () => {
+      const state = fromJS({
+        orders: [{id: 1, name: 'Pizza', popularity: 9}, {id: 2, name: 'Salad', popularity: 3}, {id: 3, name: 'Cake'}],
+        customer: {id: 1, name: 'Brian', rejections: [1]}
+      });
+      const nextState = voteOrder(state, 1, 2, false);
+      expect(nextState).to.equal(
+        fromJS({
+          orders: [{id: 1, name: 'Pizza', popularity: 9}, {id: 2, name: 'Salad', popularity: 2}, {id: 3, name: 'Cake'}],
+          customer: {id: 1, name: 'Brian', rejections: [1, 2]}
+        })
+      );
+    });
+
+    it('ignores an order with duplicate', () => {
       const state = fromJS({
         orders: [{id: 1, name: 'Pizza', popularity: 9}, {id: 2, name: 'Salad', popularity: 3}, {id: 3, name: 'Cake'}],
         customer: {id: 1, name: 'Brian', favorites: [2]}
       });
-      const nextState = favoriteOrder(state, 1, 2);
+      const nextState = voteOrder(state, 1, 2, true);
       expect(nextState).to.equal(
         fromJS({
           orders: [{id: 1, name: 'Pizza', popularity: 9}, {id: 2, name: 'Salad', popularity: 3}, {id: 3, name: 'Cake'}],

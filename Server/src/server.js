@@ -5,7 +5,7 @@ export function startServer(store) {
 
   store.subscribe(
     () => {
-      io.emit('state', store.getState().toJS())
+      io.emit('state', store.getState().toJS());
     }
   );
 

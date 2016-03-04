@@ -9,35 +9,8 @@ export function setCustomer(state, customer) {
   return state.set('customer', fromJS(customer));
 }
 
-// function getWinners(vote) {
-//   if (!vote) return [];
-//   const [a, b] = vote.get('pair');
-//   const aVotes = vote.getIn(['tally', a], 0);
-//   const bVotes = vote.getIn(['tally', b], 0);
-//   if (aVotes > bVotes)
-//   	return [a];
-//   else if (aVotes < bVotes)
-//   	return [b];
-//   else
-//   	return [a, b];
-// }
-//
-// export function next(state) {
-//   const entries = state.get('entries')
-//   	.concat(getWinners(state.get('vote')));
-// 	if(entries.size === 1) {
-// 		return state.remove('vote')
-// 					.remove('entries')
-// 					.set('winner', entries.first());
-// 	} else {
-// 	  return state.merge({
-// 	    vote: Map({pair: entries.take(2)}),
-// 	    entries: entries.skip(2)
-// 	  });
-// 	}
-// }
-//
-export function favoriteOrder(state, customerId, orderId) {
+export function voteOrder(state, customerId, orderId, like) {
+  // Ignore nonexistent customer
   const customer = state.get('customer');
   if (!customer) {
     return state;
@@ -46,30 +19,37 @@ export function favoriteOrder(state, customerId, orderId) {
     return state;
   }
 
-  const customerFavs = customer.get('favorites');
-  if (customerFavs) {
-    for (var favId of customerFavs) {
-      if (favId === orderId) {
+  // Remove from customer if order is nonexistent
+  const orders = state.get('orders');
+  if (!orders) {
+    return state.updateIn(
+      ['customer', 'favorites'], new List(), favorites => favorites.remove(orderId)
+    ).updateIn(
+      ['customer', 'rejections'], new List(), rejections => rejections.remove(orderId)
+    );
+  }
+
+  var key = like ? 'favorites' : 'rejections';
+  const voteIds = customer.get(like);
+  if (voteIds) {
+    for (var voteId of voteIds) {
+      if (voteId === orderId) {
         return state;
       }
     }
   }
 
   const nextState = state.updateIn(
-    ['customer', 'favorites'], new List(), favorites => favorites.concat(orderId)
+    ['customer', key], new List(), list => list.concat(orderId)
   );
 
-  const orders = state.get('orders');
-  if (orders.size === 0) {
-    return nextState;
-  }
-
 // FIX THIS - NOT EFFICIENT
+  var increment = like ? 1 : -1;
   const updatedOrders = orders.map(
     order => {
       if (order.get('id') === orderId) {
         return order.updateIn(
-          ['popularity'], 0, popularity => popularity + 1
+          ['popularity'], 0, popularity => popularity + increment
         );
       }
       return order;
