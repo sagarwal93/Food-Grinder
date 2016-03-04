@@ -7,7 +7,7 @@ export default function reducer(state = INITIAL_STATE, action) {
     case 'SET_CUSTOMER':
       return setCustomer(state, action.customer);
     case 'FAVORITE_ORDER':
-      return favoriteOrder(state, action.customerId, action.orderId)
+      return favoriteOrder(state, action.customerId, action.orderId);
     default:
       return state;
     // case 'NEXT':
