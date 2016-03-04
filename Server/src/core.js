@@ -1,4 +1,4 @@
-import {Map, fromJS} from 'immutable';
+import {Map, List, fromJS} from 'immutable';
 export const INITIAL_STATE = new Map();
 
 export function setOrders(state, orders) {
@@ -37,10 +37,29 @@ export function setCustomer(state, customer) {
 // 	}
 // }
 //
-// export function vote(voteState, entry) {
-//   return voteState.updateIn(
-//     ['tally', entry],
-//     0,
-//     tally => tally + 1
-//   );
-// }
+export function favoriteOrder(state, customerId, orderId) {
+  const nextState = state.updateIn(
+    ['customer', 'favorites'], new List(), favorites => favorites.concat(orderId)
+  );
+
+  const orders = state.get('orders');
+  if (orders.size === 0) {
+    return nextState;
+  }
+
+// FIX THIS - NOT EFFICIENT
+  const updatedOrders = orders.map(
+    order => {
+      if (order.get('id') === orderId) {
+        return order.updateIn(
+          ['popularity'], 0, popularity => popularity + 1
+        );
+      }
+      return order;
+    }
+  );
+
+  return nextState.merge({
+    orders: updatedOrders
+  });
+}
