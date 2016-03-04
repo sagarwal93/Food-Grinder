@@ -5,6 +5,10 @@ export function setOrders(state, orders) {
   return state.set('orders', fromJS(orders));
 }
 
+export function setCustomer(state, customer) {
+  return state.set('customer', fromJS(customer));
+}
+
 // function getWinners(vote) {
 //   if (!vote) return [];
 //   const [a, b] = vote.get('pair');
