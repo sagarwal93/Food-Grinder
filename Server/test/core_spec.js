@@ -1,4 +1,4 @@
-import {List, Map} from 'immutable';
+import {List, Map, fromJS} from 'immutable';
 import {expect} from 'chai';
 
 import {setOrders, setCustomer} from '../src/core';
@@ -52,7 +52,9 @@ describe('application logic', () => {
       const state = new Map();
       const brian = new Map({
         id: 1,
-        name: 'Brian'
+        name: 'Brian',
+        favorites: List.of(1, 2),
+        rejections: List.of(3, 4)
       });
       const nextState = setCustomer(state, brian);
       expect(nextState).to.equal(new Map({
@@ -62,19 +64,66 @@ describe('application logic', () => {
 
     it('converts to immutable', () => {
       const state = new Map();
-      const brian = {id: 1, name: 'Brian'};
+      const brian = {id: 1, name: 'Brian', favorites: [1, 2], rejections: [3, 4]};
       const nextState = setCustomer(state, brian);
       expect(nextState).to.equal(
         new Map({
           customer: new Map({
             id: 1,
-            name: 'Brian'
+            name: 'Brian',
+            favorites: List.of(1, 2),
+            rejections: List.of(3, 4)
           })
         })
       );
     });
 
   });
+
+  // describe('getCustomerOrders', () => {
+  //
+  //   it('returns the upcoming orders for a given a customer with no favorites', () => {
+  //     const orders = fromJS(
+  //       [{id: 1, name: 'Pizza'}, {id: 2, name: 'Salad'}, {id: 3, name: 'Cake'}]
+  //     );
+  //     const customer = fromJS({
+  //       id: 1, name: 'Brian'
+  //     });
+  //
+  //     expect(getCustomerOrders(orders, customer)).to.equal(fromJS({
+  //       suggestions: [{id: 1, name: 'Pizza'}, {id: 2, name: 'Salad'}, {id: 3, name: 'Cake'}]
+  //     }));
+  //   });
+  //
+  //   it('returns the favorite and upcoming orders for a given a customer with a single favorite', () => {
+  //     const orders = fromJS(
+  //       [{id: 1, name: 'Pizza'}, {id: 2, name: 'Salad'}, {id: 3, name: 'Cake'}]
+  //     );
+  //     const customer = fromJS({
+  //       id: 1, name: 'Brian', favorites: [2]
+  //     });
+  //
+  //     expect(getCustomerOrders(orders, customer)).to.equal(fromJS({
+  //       suggestions: [{id: 1, name: 'Pizza'}, {id: 3, name: 'Cake'}],
+  //       favorites: [{id: 2, name: 'Salad'}]
+  //     }));
+  //   });
+  //
+  //   it('returns the favorite and upcoming orders for a given a customer with multiple favorites', () => {
+  //     const orders = fromJS(
+  //       [{id: 1, name: 'Pizza'}, {id: 2, name: 'Salad'}, {id: 3, name: 'Cake'}]
+  //     );
+  //     const customer = fromJS({
+  //       id: 1, name: 'Brian', favorites: [1, 3]
+  //     });
+  //
+  //     expect(getCustomerOrders(orders, customer)).to.equal(fromJS({
+  //       suggestions: [{id: 2, name: 'Salad'}],
+  //       favorites: [{id: 1, name: 'Pizza'}, {id: 3, name: 'Cake'}]
+  //     }));
+  //   });
+  //
+  // });
 
   // describe('next', () => {
   //

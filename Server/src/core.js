@@ -1,5 +1,5 @@
-import {List, Map, fromJS} from 'immutable';
-export const INITIAL_STATE = Map();
+import {Map, fromJS} from 'immutable';
+export const INITIAL_STATE = new Map();
 
 export function setOrders(state, orders) {
   return state.set('orders', fromJS(orders));
