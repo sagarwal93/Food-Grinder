@@ -1,0 +1,14 @@
+client:
+    build: Client/.
+    ports:
+      - "8080:8080"
+    volumes:
+      - Client/.:/usr/src/app
+    links:
+      - server
+server:
+    build: Server/.
+    ports:
+      - 8090:8090
+    volumes:
+      - Server/.:/usr/sev/app
