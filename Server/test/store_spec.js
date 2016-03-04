@@ -7,23 +7,24 @@ describe('store', () => {
 
   it('is a Redux store configured with the correct reducer', () => {
     const store = makeStore();
-    expect(store.getState()).to.equal(Map());
+    expect(store.getState()).to.equal(new Map());
 
     store.dispatch({
       type: 'SET_ORDERS',
-      orders: [{id:1, name:'Pizza'}, {id:2, name:'Salad'}]
+      orders: [{id: 1, name: 'Pizza'}, {id: 2, name: 'Salad'}]
     });
     expect(store.getState()).to.equal(fromJS({
-      orders: [{id:1, name:'Pizza'}, {id:2, name:'Salad'}]
+      orders: [{id: 1, name: 'Pizza'}, {id: 2, name: 'Salad'}]
     }));
 
     store.dispatch({
       type: 'SET_CUSTOMER',
-      customer: {id:1, name:'Brian'}
-    })
+      customer: {id: 1, name: 'Brian'}
+    });
+
     expect(store.getState()).to.equal(fromJS({
-      orders: [{id:1, name:'Pizza'}, {id:2, name:'Salad'}],
-      customer: {id:1, name:'Brian'}
+      orders: [{id: 1, name: 'Pizza'}, {id: 2, name: 'Salad'}],
+      customer: {id: 1, name: 'Brian'}
     }));
   });
 
