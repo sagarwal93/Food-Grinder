@@ -26,6 +26,13 @@ export function nextOrder() {
   };
 }
 
+export function setCurrentOrder(order) {
+  return {
+    type: 'SET_CURRENT_ORDER',
+    order: order
+  };
+}
+
 export function vote(entry) {
   return {
     meta: {remote: true},

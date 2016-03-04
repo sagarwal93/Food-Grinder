@@ -44,6 +44,15 @@ function nextOrder(state) {
   return state;
 }
 
+function setCurrentOrder(state, order) {
+  if (order) {
+    return state.merge({
+      currentOrder: order
+    });
+  }
+  return state;
+}
+
 export default function(state = defaultState, action) {
   switch (action.type) {
     case 'SET_CLIENT_ID':
@@ -54,6 +63,8 @@ export default function(state = defaultState, action) {
       return setState(state, action.state);
     case 'NEXT_ORDER':
       return nextOrder(state);
+    case 'SET_CURRENT_ORDER':
+      return setCurrentOrder(state, action.order);
     case 'VOTE':
       return vote(state, action.entry);
     default:

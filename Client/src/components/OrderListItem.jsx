@@ -5,6 +5,6 @@ export default React.createClass({
   mixins: [PureRenderMixin],
   render () {
     const {order} = this.props;
-    return <li class="order-list-item" onClick={this.props.nextOrder}>{order.get('name')}</li>;
+    return <li class="order-list-item" onClick={this.props.setCurrentOrder.bind(this, order)}>{order.get('name')}</li>;
   }
 });
