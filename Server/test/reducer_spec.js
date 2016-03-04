@@ -15,6 +15,16 @@ describe('reducer', () => {
     }));
   });
 
+  it('handles SET_CUSTOMER', () => {
+    const initialState = Map();
+    const action = {type: 'SET_CUSTOMER', customer: {id:1, name:'Brian'}};
+    const nextState = reducer(initialState, action);
+
+    expect(nextState).to.equal(fromJS({
+      customer: {id:1, name:'Brian'}
+    }));
+  });
+
   // it('handles NEXT', () => {
   //   const initialState = fromJS({
   //     entries: ['Trainspotting', '28 Days Later']

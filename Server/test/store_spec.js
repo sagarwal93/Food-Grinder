@@ -16,6 +16,15 @@ describe('store', () => {
     expect(store.getState()).to.equal(fromJS({
       orders: [{id:1, name:'Pizza'}, {id:2, name:'Salad'}]
     }));
+
+    store.dispatch({
+      type: 'SET_CUSTOMER',
+      customer: {id:1, name:'Brian'}
+    })
+    expect(store.getState()).to.equal(fromJS({
+      orders: [{id:1, name:'Pizza'}, {id:2, name:'Salad'}],
+      customer: {id:1, name:'Brian'}
+    }));
   });
 
 });
