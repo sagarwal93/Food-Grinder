@@ -1,5 +1,36 @@
 [
-  {"id":1, "name":"Pizza"},
-  {"id":2, "name":"Salad"},
-  {"id":3, "name":"Krispy Chicken"}
+  {
+    "id":1,
+    "name":"1/4 Lb. Single Burger",
+    "company":"Wendy's",
+    "description":"A quarter-pound of 100% real beef and the freshest premium toppings on warm, toasted buns.",
+    "dietaryTags": [
+      "No Poultry",
+      "No Pork",
+      "No Seafood"
+    ],
+    "modifiers": [
+      "Bun",
+      "Mayo",
+      "Ketchup",
+      "Pickle",
+      "Red onoin",
+      "Lettuce",
+      "Tomato",
+      "American Cheese"
+    ],
+    "price": 5.59
+  },
+  {
+    "id":2,
+    "name":"BBQ Ranch Chicken Salad (Full Size)",
+    "description":"Taste big flavor that truly stands alone with fire-roasted corn, Applewood Smoked Bacon, warm grilled chicken, diced tomatoes and Marzetti® Simply Dressed® BBQ Ranch Dressing.",
+    "price": 6.99
+  },
+  {
+    "id":3,
+    "name":"Apple Pecan Chicken Salad (Full Size)",
+    "description": "Sink your fork into crispy hand-picked red and green apples, roasted pecans, sweet dried cranberries and real blue cheese crumbles. Then we add tender grilled chicken and pomegranate vinaigrette dressing to the mix for a sweet combination, perfect for any meal.",
+    "price": 6.99
+  }
 ]

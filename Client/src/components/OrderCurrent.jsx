@@ -5,7 +5,12 @@ export default React.createClass({
   mixins: [PureRenderMixin],
   render () {
     return <div className="current-order">
-      The current order is {this.props.currentOrder.get('name')}
+      <div>
+        {this.props.currentOrder.get('name')}
+      </div>
+      <div>
+        {this.props.currentOrder.get('description')}
+      </div>
     </div>;
   }
 });

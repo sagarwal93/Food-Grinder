@@ -11,7 +11,8 @@ import getClientId from './client_id';
 import App from './components/App';
 import {VotingContainer} from './components/Voting';
 import {ResultsContainer} from './components/Results';
-import {OrdersContainer} from './components/Orders';
+import {OrdersContainer} from './containers/Orders';
+import {OrderContainer} from './containers/Order';
 
 
 require('./style.css');
@@ -44,6 +45,7 @@ const routes = <Route component={App}>
   <Route path="/" component={VotingContainer} />
   <Route path="/results" component={ResultsContainer} />
   <Route path="/orders" component={OrdersContainer} />
+  <Route path="/order" component={OrderContainer} />
 </Route>;
 
 ReactDOM.render(

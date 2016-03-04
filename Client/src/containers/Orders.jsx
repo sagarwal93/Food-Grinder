@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import OrderCurrent from './OrderCurrent'; //eslint-disable-line
-import OrderList from './OrderList'; //eslint-disable-line
+import OrderCurrent from './../components/OrderCurrent'; //eslint-disable-line
+import OrderList from './../components/OrderList'; //eslint-disable-line
 import * as actionCreators from '../action_creators';
 
 export const Orders = React.createClass({

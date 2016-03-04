@@ -18,7 +18,7 @@ export const Results = React.createClass({
     return 0;
   },
   getVotesBlockWidth: function(entry) {
-    return (this.getVotes(entry) * VOTE_WIDTH_PERCENT) + '%';
+    return this.getVotes(entry) * VOTE_WIDTH_PERCENT + '%';
   },
   render: function() {
     return this.props.winner ?
