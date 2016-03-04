@@ -8,4 +8,8 @@ store.dispatch({
   type: 'SET_ORDERS',
   orders: require('./orders.json')
 });
-// store.dispatch({type: 'NEXT'});
+
+store.dispatch({
+  type: 'SET_CUSTOMER',
+  customer: require('./customer.json')
+});
