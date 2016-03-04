@@ -38,6 +38,23 @@ export function setCustomer(state, customer) {
 // }
 //
 export function favoriteOrder(state, customerId, orderId) {
+  const customer = state.get('customer');
+  if (!customer) {
+    return state;
+  }
+  if (customer.get('id') !== customerId) {
+    return state;
+  }
+
+  const customerFavs = customer.get('favorites');
+  if (customerFavs) {
+    for (var favId of customerFavs) {
+      if (favId === orderId) {
+        return state;
+      }
+    }
+  }
+
   const nextState = state.updateIn(
     ['customer', 'favorites'], new List(), favorites => favorites.concat(orderId)
   );

@@ -201,7 +201,7 @@ describe('application logic', () => {
   //
   describe('favoriteOrder', () => {
 
-    it('favorites and upvotes an order', () => {
+    it('favorites and upvotes an order when no favorites are set', () => {
       const state = fromJS({
         orders: [{id: 1, name: 'Pizza'}, {id: 2, name: 'Salad'}, {id: 3, name: 'Cake'}],
         customer: {id: 1, name: 'Brian'}
@@ -215,23 +215,33 @@ describe('application logic', () => {
       );
     });
 
-    // it('adds to existing tally for the voted entry', () => {
-    //   const state = Map({
-    //     pair: List.of('Trainspotting', '28 Days Later'),
-    //     tally: Map({
-    //       'Trainspotting': 3,
-    //       '28 Days Later': 2
-    //     })
-    //   });
-    //   const nextState = vote(state, 'Trainspotting');
-    //   expect(nextState).to.equal(Map({
-    //     pair: List.of('Trainspotting', '28 Days Later'),
-    //     tally: Map({
-    //       'Trainspotting': 4,
-    //       '28 Days Later': 2
-    //     })
-    //   }));
-    // });
+    it('favorites and upvotes an order when favorites are already set', () => {
+      const state = fromJS({
+        orders: [{id: 1, name: 'Pizza', popularity: 9}, {id: 2, name: 'Salad', popularity: 3}, {id: 3, name: 'Cake'}],
+        customer: {id: 1, name: 'Brian', favorites: [1]}
+      });
+      const nextState = favoriteOrder(state, 1, 2);
+      expect(nextState).to.equal(
+        fromJS({
+          orders: [{id: 1, name: 'Pizza', popularity: 9}, {id: 2, name: 'Salad', popularity: 4}, {id: 3, name: 'Cake'}],
+          customer: {id: 1, name: 'Brian', favorites: [1, 2]}
+        })
+      );
+    });
+
+    it('favorites and upvotes an order with duplicate', () => {
+      const state = fromJS({
+        orders: [{id: 1, name: 'Pizza', popularity: 9}, {id: 2, name: 'Salad', popularity: 3}, {id: 3, name: 'Cake'}],
+        customer: {id: 1, name: 'Brian', favorites: [2]}
+      });
+      const nextState = favoriteOrder(state, 1, 2);
+      expect(nextState).to.equal(
+        fromJS({
+          orders: [{id: 1, name: 'Pizza', popularity: 9}, {id: 2, name: 'Salad', popularity: 3}, {id: 3, name: 'Cake'}],
+          customer: {id: 1, name: 'Brian', favorites: [2]}
+        })
+      );
+    });
 
   });
 
