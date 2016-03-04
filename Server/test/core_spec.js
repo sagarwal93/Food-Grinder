@@ -8,36 +8,36 @@ describe('application logic', () => {
   describe('setOrders', () => {
 
     it('adds the orders to the state', () => {
-      const state = Map();
-      const order1 = Map({
-        id:1,
-        name:'Pizza'
+      const state = new Map();
+      const order1 = new Map({
+        id: 1,
+        name: 'Pizza'
       });
-      const order2 = Map({
-        id:2,
-        name:'Salad'
+      const order2 = new Map({
+        id: 2,
+        name: 'Salad'
       });
       const orders = List.of(order1, order2);
       const nextState = setOrders(state, orders);
-      expect(nextState).to.equal(Map({
+      expect(nextState).to.equal(new Map({
         orders: List.of(order1, order2)
       }));
     });
 
     it('converts to immutable', () => {
-      const state = Map();
-      const orders = [{id:1, name:'Pizza'}, {id:2, name:'Salad'}];
+      const state = new Map();
+      const orders = [{id: 1, name: 'Pizza'}, {id: 2, name: 'Salad'}];
       const nextState = setOrders(state, orders);
       expect(nextState).to.equal(
-        Map({
+        new Map({
           orders: List.of(
-            Map({
-              id:1,
-              name:'Pizza'
+            new Map({
+              id: 1,
+              name: 'Pizza'
             }),
-            Map({
-              id:2,
-              name:'Salad'
+            new Map({
+              id: 2,
+              name: 'Salad'
             })
           )
         })
@@ -49,26 +49,26 @@ describe('application logic', () => {
   describe('setCustomer', () => {
 
     it('adds the customer to the state', () => {
-      const state = Map();
-      const brian = Map({
-        id:1,
-        name:'Brian'
+      const state = new Map();
+      const brian = new Map({
+        id: 1,
+        name: 'Brian'
       });
       const nextState = setCustomer(state, brian);
-      expect(nextState).to.equal(Map({
+      expect(nextState).to.equal(new Map({
         customer: brian
       }));
     });
 
     it('converts to immutable', () => {
-      const state = Map();
-      const brian = {id:1, name:'Brian'};
+      const state = new Map();
+      const brian = {id: 1, name: 'Brian'};
       const nextState = setCustomer(state, brian);
       expect(nextState).to.equal(
-        Map({
-          customer: Map({
-            id:1,
-            name:'Brian'
+        new Map({
+          customer: new Map({
+            id: 1,
+            name: 'Brian'
           })
         })
       );
