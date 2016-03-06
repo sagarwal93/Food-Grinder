@@ -11,6 +11,9 @@ export default React.createClass({
       <div>
         {this.props.currentOrder.get('description')}
       </div>
+      <div>
+        {this.props.currentOrder.get('price')}
+      </div>
     </div>;
   }
 });
