@@ -11,5 +11,5 @@ store.dispatch({
 
 store.dispatch({
   type: 'SET_CUSTOMER',
-  customer: require('./customer.json')
+  customers: require('./customers.json')
 });
