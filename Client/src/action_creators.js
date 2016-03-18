@@ -70,3 +70,11 @@ export function favoriteOrderForCustomer(orderId, customerId) {
     customerId: customerId
   };
 }
+
+export function getCustomer(username) {
+  return {
+    meta: {fetch: true},
+    type: 'GET_CUSTOMER',
+    username: username
+  };
+}

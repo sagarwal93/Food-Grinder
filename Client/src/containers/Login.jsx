@@ -5,7 +5,8 @@ import Profile from './../components/Profile'; //eslint-disable-line
 
 export const Login = React.createClass({
   showCustomer() {
-    this.props.setCustomer();
+    // this.props.setCustomer();
+    this.props.getCustomer('bsquared');
   },
 
   render () {

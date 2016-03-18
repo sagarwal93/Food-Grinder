@@ -16,7 +16,11 @@ export function startServer(store) {
       store.dispatch.bind(store);
     });
     socket.on('fetch', (data) => {
-      return fetch(store.getState(), data);
+      console.log(data);
+      const retVal = fetch(store.getState(), data);
+      console.log(retVal);
+      io.emit('customer', retVal.toJS());
+      return retVal;
     });
   });
 }
