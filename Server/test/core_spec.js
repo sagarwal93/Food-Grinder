@@ -93,7 +93,7 @@ describe('application logic', () => {
       const state = fromJS({
         customers: [{id: 1, name: 'Brian'}, {id: 2, name: 'Les'}]
       });
-      const customer = getCustomer(state, 2);
+      const customer = getCustomer(state, 'Les');
       expect(customer).to.equal(
         fromJS({
           id: 2, name: 'Les'
@@ -105,7 +105,7 @@ describe('application logic', () => {
       const state = fromJS({
         customers: [{id: 1, name: 'Brian'}]
       });
-      const customer = getCustomer(state, 2);
+      const customer = getCustomer(state, 'Les');
       expect(customer).to.equal(null);
     });
 
