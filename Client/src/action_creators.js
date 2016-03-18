@@ -33,6 +33,13 @@ export function setCurrentOrder(order) {
   };
 }
 
+export function setCustomer(customer) {
+  return {
+    type: 'SET_CUSTOMER',
+    customer: customer
+  };
+}
+
 export function vote(entry) {
   return {
     meta: {remote: true},
