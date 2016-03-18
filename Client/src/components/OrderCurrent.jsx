@@ -3,6 +3,9 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 export default React.createClass({
   mixins: [PureRenderMixin],
+  rejectOrder() {
+    this.props.showNextOrder();
+  },
   render () {
     return <div className="current-order">
       <div>
@@ -14,6 +17,9 @@ export default React.createClass({
       <div>
         {this.props.currentOrder.get('price')}
       </div>
+      <button onClick={this.rejectOrder}>No</button>
+      <button>Yes</button>
+      <button>Order Now</button>
     </div>;
   }
 });

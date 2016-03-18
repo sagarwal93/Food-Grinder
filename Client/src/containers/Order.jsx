@@ -16,7 +16,8 @@ export const Order = React.createClass({
       <div>
         {
           order.size ?
-          <OrderCurrent currentOrder={order}/>
+          <OrderCurrent currentOrder={order}
+            showNextOrder={this.showNextOrder}/>
           :
           <div>
             No order exists

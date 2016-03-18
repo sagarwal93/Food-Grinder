@@ -13,6 +13,7 @@ import {VotingContainer} from './components/Voting';
 import {ResultsContainer} from './components/Results';
 import {OrdersContainer} from './containers/Orders';
 import {OrderContainer} from './containers/Order';
+import {LoginContainer} from './containers/Login';
 
 
 require('./style.css');
@@ -46,6 +47,7 @@ const routes = <Route component={App}>
   <Route path="/results" component={ResultsContainer} />
   <Route path="/orders" component={OrdersContainer} />
   <Route path="/order" component={OrderContainer} />
+  <Route path="/login" component={LoginContainer} />
 </Route>;
 
 ReactDOM.render(
