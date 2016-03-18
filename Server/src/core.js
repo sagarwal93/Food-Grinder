@@ -66,11 +66,11 @@ export function setCustomers(state, customers) {
   return state.set('customers', fromJS(customers));
 }
 
-export function getCustomer(state, customerName) {
+export function getCustomer(state, username) {
   const customers = state.get('customers');
   if (customers) {
     for (var customer of customers) {
-      if (customer.get('name') === customerName) {
+      if (customer.get('username') === username) {
         return customer;
       }
     }
