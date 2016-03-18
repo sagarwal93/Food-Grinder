@@ -25,21 +25,6 @@ describe('reducer', () => {
     }));
   });
 
-  // it('handles NEXT', () => {
-  //   const initialState = fromJS({
-  //     entries: ['Trainspotting', '28 Days Later']
-  //   });
-  //   const action = {type: 'NEXT'};
-  //   const nextState = reducer(initialState, action);
-  //
-  //   expect(nextState).to.equal(fromJS({
-  //     vote: {
-  //       pair: ['Trainspotting', '28 Days Later']
-  //     },
-  //     entries: []
-  //   }));
-  // });
-  //
   it('handles FAVORITE_ORDER', () => {
     const initialState = fromJS({
       orders: [{id: 1, name: 'Pizza'}, {id: 2, name: 'Salad'}, {id: 3, name: 'Cake'}],
