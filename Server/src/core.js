@@ -1,6 +1,25 @@
 import {Map, List, fromJS} from 'immutable';
 export const INITIAL_STATE = new Map();
 
+function updateOrderPopularity(state, orderId, like) {
+  var increment = like ? 1 : -1;
+  const orders = state.get('orders');
+  // FIX THIS - NOT EFFICIENT
+  const updatedOrders = orders.map(
+    order => {
+      if (order.get('id') === orderId) {
+        return order.updateIn(
+          ['popularity'], 0, popularity => popularity + increment
+        );
+      }
+      return order;
+    }
+  );
+  return state.merge({
+    orders: updatedOrders
+  });
+}
+
 export function setOrders(state, orders) {
   return state.set('orders', fromJS(orders));
 }
@@ -12,51 +31,22 @@ export function setCustomer(state, customer) {
 export function voteOrder(state, customerId, orderId, like) {
   // Ignore nonexistent customer
   const customer = state.get('customer');
-  if (!customer) {
-    return state;
-  }
-  if (customer.get('id') !== customerId) {
+  if (!customer || customer.get('id') !== customerId) {
     return state;
   }
 
-  // Remove from customer if order is nonexistent
-  const orders = state.get('orders');
-  if (!orders) {
-    return state.updateIn(
-      ['customer', 'favorites'], new List(), favorites => favorites.remove(orderId)
-    ).updateIn(
-      ['customer', 'rejections'], new List(), rejections => rejections.remove(orderId)
-    );
+  // Check for duplicates
+  var key1 = like ? 'favorites' : 'rejections';
+  const voteIds = state.get('customer').get(key1);
+  if (voteIds && voteIds.indexOf(orderId) > -1) {
+    return state;
   }
 
-  var key = like ? 'favorites' : 'rejections';
-  const voteIds = customer.get(like);
-  if (voteIds) {
-    for (var voteId of voteIds) {
-      if (voteId === orderId) {
-        return state;
-      }
-    }
-  }
-
-  const nextState = state.updateIn(
-    ['customer', key], new List(), list => list.concat(orderId)
+  var key2 = like ? 'rejections' : 'favorites';
+  const updatedCustomerState = state.updateIn(
+    ['customer', key1], new List(), list1 => list1.concat(orderId)
+  ).updateIn(
+    ['customer', key2], new List(), list2 => list2.splice(list2.indexOf(orderId), 1)
   );
-
-// FIX THIS - NOT EFFICIENT
-  var increment = like ? 1 : -1;
-  const updatedOrders = orders.map(
-    order => {
-      if (order.get('id') === orderId) {
-        return order.updateIn(
-          ['popularity'], 0, popularity => popularity + increment
-        );
-      }
-      return order;
-    }
-  );
-
-  return nextState.merge({
-    orders: updatedOrders
-  });
+  return updateOrderPopularity(updatedCustomerState, orderId, like);
 }

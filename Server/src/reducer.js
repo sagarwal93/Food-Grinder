@@ -1,4 +1,4 @@
-import {setOrders, setCustomer, favoriteOrder, INITIAL_STATE} from './core';
+import {setOrders, setCustomer, voteOrder, INITIAL_STATE} from './core';
 
 export default function reducer(state = INITIAL_STATE, action) {
   switch (action.type) {
@@ -7,7 +7,9 @@ export default function reducer(state = INITIAL_STATE, action) {
     case 'SET_CUSTOMER':
       return setCustomer(state, action.customer);
     case 'FAVORITE_ORDER':
-      return favoriteOrder(state, action.customerId, action.orderId);
+      return voteOrder(state, action.customerId, action.orderId, true);
+    case 'REJECT_ORDER':
+      return voteOrder(state, action.customerId, action.orderId, false);
     default:
       return state;
     // case 'NEXT':
