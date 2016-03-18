@@ -13,18 +13,6 @@ function getOrder(state, orderId) {
   return null;
 }
 
-function getCustomer(state, customerId) {
-  const customers = state.get('customers');
-  if (customers) {
-    for (var customer of customers) {
-      if (customer.get('id') === customerId) {
-        return customer;
-      }
-    }
-  }
-  return null;
-}
-
 function updateOrderInCustomer(state, customer, orderId, like) {
   var key1 = like ? 'favorites' : 'rejections';
   var key2 = like ? 'rejections' : 'favorites';
@@ -64,6 +52,18 @@ export function setOrders(state, orders) {
 
 export function setCustomers(state, customers) {
   return state.set('customers', fromJS(customers));
+}
+
+export function getCustomer(state, customerId) {
+  const customers = state.get('customers');
+  if (customers) {
+    for (var customer of customers) {
+      if (customer.get('id') === customerId) {
+        return customer;
+      }
+    }
+  }
+  return null;
 }
 
 export function voteOrder(state, customerId, orderId, like) {

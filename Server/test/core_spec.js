@@ -1,7 +1,7 @@
 import {List, Map, fromJS} from 'immutable';
 import {expect} from 'chai';
 
-import {setOrders, setCustomers, voteOrder} from '../src/core';
+import {setOrders, setCustomers, getCustomer, voteOrder} from '../src/core';
 
 describe('application logic', () => {
 
@@ -83,6 +83,30 @@ describe('application logic', () => {
           )
         })
       );
+    });
+
+  });
+
+  describe('getCustomer', () => {
+
+    it('returns the customer object', () => {
+      const state = fromJS({
+        customers: [{id: 1, name: 'Brian'}, {id: 2, name: 'Les'}]
+      });
+      const customer = getCustomer(state, 2);
+      expect(customer).to.equal(
+        fromJS({
+          id: 2, name: 'Les'
+        })
+      );
+    });
+
+    it('returns null if the customer does not exist', () => {
+      const state = fromJS({
+        customers: [{id: 1, name: 'Brian'}]
+      });
+      const customer = getCustomer(state, 2);
+      expect(customer).to.equal(null);
     });
 
   });
