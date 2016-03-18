@@ -1,7 +1,7 @@
 import {List, Map, fromJS} from 'immutable';
 import {expect} from 'chai';
 
-import {setOrders, setCustomer, voteOrder} from '../src/core';
+import {setOrders, setCustomers, voteOrder} from '../src/core';
 
 describe('application logic', () => {
 
@@ -46,34 +46,41 @@ describe('application logic', () => {
 
   });
 
-  describe('setCustomer', () => {
+  describe('setCustomers', () => {
 
-    it('adds the customer to the state', () => {
+    it('sets the customers in the state', () => {
       const state = new Map();
-      const brian = new Map({
+      const customer1 = new Map({
         id: 1,
-        name: 'Brian',
-        favorites: List.of(1, 2),
-        rejections: List.of(3, 4)
+        name: 'Brian'
       });
-      const nextState = setCustomer(state, brian);
+      const customer2 = new Map({
+        id: 2,
+        name: 'Les'
+      });
+      const customers = List.of(customer1, customer2);
+      const nextState = setCustomers(state, customers);
       expect(nextState).to.equal(new Map({
-        customer: brian
+        customers: List.of(customer1, customer2)
       }));
     });
 
     it('converts to immutable', () => {
       const state = new Map();
-      const brian = {id: 1, name: 'Brian', favorites: [1, 2], rejections: [3, 4]};
-      const nextState = setCustomer(state, brian);
+      const customers = [{id: 1, name: 'Brian'}, {id: 2, name: 'Les'}];
+      const nextState = setCustomers(state, customers);
       expect(nextState).to.equal(
         new Map({
-          customer: new Map({
-            id: 1,
-            name: 'Brian',
-            favorites: List.of(1, 2),
-            rejections: List.of(3, 4)
-          })
+          customers: List.of(
+            new Map({
+              id: 1,
+              name: 'Brian'
+            }),
+            new Map({
+              id: 2,
+              name: 'Les'
+            })
+          )
         })
       );
     });
@@ -82,7 +89,33 @@ describe('application logic', () => {
 
   describe('voteOrder', () => {
 
-    it('ignores nonexistent customer', () => {
+    it('ignores empty order list', () => {
+      const state = fromJS({
+        customers: [{id: 1, name: 'Brian'}]
+      });
+      const nextState = voteOrder(state, 1, 2, true);
+      expect(nextState).to.equal(
+        fromJS({
+          customers: [{id: 1, name: 'Brian'}]
+        })
+      );
+    });
+
+    it('ignores nonexistent order', () => {
+      const state = fromJS({
+        orders: [{id: 1, name: 'Pizza'}, {id: 3, name: 'Cake'}],
+        customers: [{id: 2, name: 'Les'}]
+      });
+      const nextState = voteOrder(state, 1, 2, true);
+      expect(nextState).to.equal(
+        fromJS({
+          orders: [{id: 1, name: 'Pizza'}, {id: 3, name: 'Cake'}],
+          customers: [{id: 2, name: 'Les'}]
+        })
+      );
+    });
+
+    it('ignores empty customer list', () => {
       const state = fromJS({
         orders: [{id: 1, name: 'Pizza', popularity: 9}, {id: 2, name: 'Salad', popularity: 3}, {id: 3, name: 'Cake'}]
       });
@@ -94,16 +127,16 @@ describe('application logic', () => {
       );
     });
 
-    it('ignores incorrect customer ID', () => {
+    it('ignores nonexistent customer', () => {
       const state = fromJS({
         orders: [{id: 1, name: 'Pizza', popularity: 9}, {id: 2, name: 'Salad', popularity: 3}, {id: 3, name: 'Cake'}],
-        customer: {id: 2, name: 'Les'}
+        customers: [{id: 2, name: 'Les'}]
       });
       const nextState = voteOrder(state, 1, 2, true);
       expect(nextState).to.equal(
         fromJS({
           orders: [{id: 1, name: 'Pizza', popularity: 9}, {id: 2, name: 'Salad', popularity: 3}, {id: 3, name: 'Cake'}],
-          customer: {id: 2, name: 'Les'}
+          customers: [{id: 2, name: 'Les'}]
         })
       );
     });
@@ -111,13 +144,13 @@ describe('application logic', () => {
     it('favorites and upvotes an order when no favorites are set', () => {
       const state = fromJS({
         orders: [{id: 1, name: 'Pizza'}, {id: 2, name: 'Salad'}, {id: 3, name: 'Cake'}],
-        customer: {id: 1, name: 'Brian'}
+        customers: [{id: 1, name: 'Brian'}]
       });
       const nextState = voteOrder(state, 1, 2, true);
       expect(nextState).to.equal(
         fromJS({
           orders: [{id: 1, name: 'Pizza'}, {id: 2, name: 'Salad', popularity: 1}, {id: 3, name: 'Cake'}],
-          customer: {id: 1, name: 'Brian', favorites: [2]}
+          customers: [{id: 1, name: 'Brian', favorites: [2]}]
         })
       );
     });
@@ -125,13 +158,13 @@ describe('application logic', () => {
     it('favorites and upvotes an order when favorites are already set', () => {
       const state = fromJS({
         orders: [{id: 1, name: 'Pizza', popularity: 9}, {id: 2, name: 'Salad', popularity: 3}, {id: 3, name: 'Cake'}],
-        customer: {id: 1, name: 'Brian', favorites: [1], rejections: [2, 3]}
+        customers: [{id: 1, name: 'Brian', favorites: [1], rejections: [2, 3]}]
       });
       const nextState = voteOrder(state, 1, 2, true);
       expect(nextState).to.equal(
         fromJS({
           orders: [{id: 1, name: 'Pizza', popularity: 9}, {id: 2, name: 'Salad', popularity: 4}, {id: 3, name: 'Cake'}],
-          customer: {id: 1, name: 'Brian', favorites: [1, 2], rejections: [3]}
+          customers: [{id: 1, name: 'Brian', favorites: [1, 2], rejections: [3]}]
         })
       );
     });
@@ -139,13 +172,13 @@ describe('application logic', () => {
     it('ignores a favorite with duplicate', () => {
       const state = fromJS({
         orders: [{id: 1, name: 'Pizza', popularity: 9}, {id: 2, name: 'Salad', popularity: 3}, {id: 3, name: 'Cake'}],
-        customer: {id: 1, name: 'Brian', favorites: [2]}
+        customers: [{id: 1, name: 'Brian', favorites: [2]}]
       });
       const nextState = voteOrder(state, 1, 2, true);
       expect(nextState).to.equal(
         fromJS({
           orders: [{id: 1, name: 'Pizza', popularity: 9}, {id: 2, name: 'Salad', popularity: 3}, {id: 3, name: 'Cake'}],
-          customer: {id: 1, name: 'Brian', favorites: [2]}
+          customers: [{id: 1, name: 'Brian', favorites: [2]}]
         })
       );
     });
@@ -153,13 +186,13 @@ describe('application logic', () => {
     it('rejects and downvotes an order when no rejections are set', () => {
       const state = fromJS({
         orders: [{id: 1, name: 'Pizza'}, {id: 2, name: 'Salad'}, {id: 3, name: 'Cake'}],
-        customer: {id: 1, name: 'Brian'}
+        customers: [{id: 1, name: 'Brian'}]
       });
       const nextState = voteOrder(state, 1, 2, false);
       expect(nextState).to.equal(
         fromJS({
           orders: [{id: 1, name: 'Pizza'}, {id: 2, name: 'Salad', popularity: -1}, {id: 3, name: 'Cake'}],
-          customer: {id: 1, name: 'Brian', rejections: [2]}
+          customers: [{id: 1, name: 'Brian', rejections: [2]}]
         })
       );
     });
@@ -167,13 +200,13 @@ describe('application logic', () => {
     it('rejects and downvotes an order when rejections are already set', () => {
       const state = fromJS({
         orders: [{id: 1, name: 'Pizza', popularity: 9}, {id: 2, name: 'Salad', popularity: 3}, {id: 3, name: 'Cake'}],
-        customer: {id: 1, name: 'Brian', favorites: [2, 3], rejections: [1]}
+        customers: [{id: 1, name: 'Brian', favorites: [2, 3], rejections: [1]}]
       });
       const nextState = voteOrder(state, 1, 2, false);
       expect(nextState).to.equal(
         fromJS({
           orders: [{id: 1, name: 'Pizza', popularity: 9}, {id: 2, name: 'Salad', popularity: 2}, {id: 3, name: 'Cake'}],
-          customer: {id: 1, name: 'Brian', favorites: [3], rejections: [1, 2]}
+          customers: [{id: 1, name: 'Brian', favorites: [3], rejections: [1, 2]}]
         })
       );
     });
@@ -181,13 +214,13 @@ describe('application logic', () => {
     it('ignores a rejection with duplicate', () => {
       const state = fromJS({
         orders: [{id: 1, name: 'Pizza', popularity: 9}, {id: 2, name: 'Salad', popularity: 3}, {id: 3, name: 'Cake'}],
-        customer: {id: 1, name: 'Brian', rejections: [2]}
+        customers: [{id: 1, name: 'Brian', rejections: [2]}]
       });
       const nextState = voteOrder(state, 1, 2, false);
       expect(nextState).to.equal(
         fromJS({
           orders: [{id: 1, name: 'Pizza', popularity: 9}, {id: 2, name: 'Salad', popularity: 3}, {id: 3, name: 'Cake'}],
-          customer: {id: 1, name: 'Brian', rejections: [2]}
+          customers: [{id: 1, name: 'Brian', rejections: [2]}]
         })
       );
     });

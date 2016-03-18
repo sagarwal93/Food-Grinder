@@ -18,13 +18,13 @@ describe('store', () => {
     }));
 
     store.dispatch({
-      type: 'SET_CUSTOMER',
-      customer: {id: 1, name: 'Brian', favorites: [1, 2]}
+      type: 'SET_CUSTOMERS',
+      customers: [{id: 1, name: 'Brian', favorites: [1, 2]}]
     });
 
     expect(store.getState()).to.equal(fromJS({
       orders: [{id: 1, name: 'Pizza'}, {id: 2, name: 'Salad'}],
-      customer: {id: 1, name: 'Brian', favorites: [1, 2]}
+      customers: [{id: 1, name: 'Brian', favorites: [1, 2]}]
     }));
   });
 
