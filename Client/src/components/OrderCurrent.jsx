@@ -3,6 +3,14 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 export default React.createClass({
   mixins: [PureRenderMixin],
+  favoriteOrder() {
+    // const customerId = this.props.customer.get('id');
+    const customerId = 1;
+    const orderId = this.props.currentOrder.get('id');
+
+    this.props.favoriteOrderForCustomer(orderId, customerId);
+    this.props.showNextOrder();
+  },
   rejectOrder() {
     this.props.showNextOrder();
   },
@@ -17,8 +25,10 @@ export default React.createClass({
       <div>
         {this.props.currentOrder.get('price')}
       </div>
-      <button onClick={this.rejectOrder}>No</button>
-      <button>Yes</button>
+      <div>
+        <button onClick={this.rejectOrder}>Reject</button>
+        <button onClick={this.favoriteOrder}>Favorite</button>
+      </div>
       <button>Order Now</button>
     </div>;
   }

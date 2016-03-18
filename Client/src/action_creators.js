@@ -61,3 +61,12 @@ export function restart() {
     type: 'RESTART'
   };
 }
+
+export function favoriteOrderForCustomer(orderId, customerId) {
+  return {
+    meta: {remote: true},
+    type: 'FAVORITE_ORDER',
+    orderId: orderId,
+    customerId: customerId
+  };
+}

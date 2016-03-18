@@ -9,7 +9,6 @@ export const Orders = React.createClass({
     return (
       <div>
         <OrderList {...this.props} />
-        <OrderCurrent currentOrder={this.props.currentOrder} />
       </div>
     );
   }
@@ -17,8 +16,7 @@ export const Orders = React.createClass({
 
 function mapStateToProps(state) {
   return {
-    orders: state.getIn(['orders']),
-    currentOrder: state.get('currentOrder')
+    orders: state.getIn(['orders'])
   };
 }
 
