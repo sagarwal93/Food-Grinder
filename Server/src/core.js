@@ -1,7 +1,7 @@
 import {Map, List, fromJS} from 'immutable';
 export const INITIAL_STATE = new Map();
 
-function getOrder(state, orderId) {
+function getOrderById(state, orderId) {
   const orders = state.get('orders');
   if (orders) {
     for (var order of orders) {
@@ -13,7 +13,7 @@ function getOrder(state, orderId) {
   return null;
 }
 
-function getCustomer(state, customerId) {
+function getCustomerById(state, customerId) {
   const customers = state.get('customers');
   if (customers) {
     for (var customer of customers) {
@@ -66,13 +66,25 @@ export function setCustomers(state, customers) {
   return state.set('customers', fromJS(customers));
 }
 
+export function getCustomer(state, username) {
+  const customers = state.get('customers');
+  if (customers) {
+    for (var customer of customers) {
+      if (customer.get('username') === username) {
+        return customer;
+      }
+    }
+  }
+  return null;
+}
+
 export function voteOrder(state, customerId, orderId, like) {
-  const order = getOrder(state, orderId);
+  const order = getOrderById(state, orderId);
   if (!order) {
     return state;
   }
 
-  const customer = getCustomer(state, customerId);
+  const customer = getCustomerById(state, customerId);
   if (!customer) {
     return state;
   }
