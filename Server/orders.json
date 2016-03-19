@@ -19,18 +19,30 @@
       "Tomato",
       "American Cheese"
     ],
-    "price": 5.59
+    "price": 5.59,
+    "geolocation": {
+      "lat": 33.777582,
+      "lon": -84.388508
+    }
   },
   {
     "id":2,
     "name":"BBQ Ranch Chicken Salad (Full Size)",
     "description":"Taste big flavor that truly stands alone with fire-roasted corn, Applewood Smoked Bacon, warm grilled chicken, diced tomatoes and Marzetti® Simply Dressed® BBQ Ranch Dressing.",
-    "price": 6.99
+    "price": 6.99,
+    "geolocation": {
+      "lat": 33.776806,
+      "lon": -84.388647
+    }
   },
   {
     "id":3,
     "name":"Apple Pecan Chicken Salad (Full Size)",
     "description": "Sink your fork into crispy hand-picked red and green apples, roasted pecans, sweet dried cranberries and real blue cheese crumbles. Then we add tender grilled chicken and pomegranate vinaigrette dressing to the mix for a sweet combination, perfect for any meal.",
-    "price": 6.99
+    "price": 6.99,
+    "geolocation": {
+      "lat": 33.844411,
+      "lon": -84.363930
+    }
   }
 ]
