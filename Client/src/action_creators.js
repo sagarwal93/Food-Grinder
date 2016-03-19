@@ -33,6 +33,13 @@ export function setCurrentOrder(order) {
   };
 }
 
+export function setCustomer(customer) {
+  return {
+    type: 'SET_CUSTOMER',
+    customer: customer
+  };
+}
+
 export function vote(entry) {
   return {
     meta: {remote: true},
@@ -52,5 +59,22 @@ export function restart() {
   return {
     meta: {remote: true},
     type: 'RESTART'
+  };
+}
+
+export function favoriteOrderForCustomer(orderId, customerId) {
+  return {
+    meta: {remote: true},
+    type: 'FAVORITE_ORDER',
+    orderId: orderId,
+    customerId: customerId
+  };
+}
+
+export function getCustomer(username) {
+  return {
+    meta: {fetch: true},
+    type: 'GET_CUSTOMER',
+    username: username
   };
 }

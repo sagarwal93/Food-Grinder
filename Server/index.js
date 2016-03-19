@@ -21,6 +21,6 @@ esclient.search({
     });
   },
   function(err) {
-    console.log(err);
+    console.log(err); //eslint-disable-line
   }
 );

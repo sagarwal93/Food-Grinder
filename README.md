@@ -12,4 +12,10 @@ A simple `npm install` is all that is needed.
 #### Client
 `webpack-dev-server`
 
+### Elastic Search
+# nolonode:7200
+
+### Kibana
+# nolonode:5601
+
 Once both the client and server are running visiting http://localhost:8080/#/orders should return a list of orders.

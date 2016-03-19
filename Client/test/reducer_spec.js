@@ -78,7 +78,7 @@ describe('reducer', () => {
         {id: 1, name: 'Pizza'},
         {id: 2, name: 'Salad'}
       ],
-      currentOrder: {id: 0, name: 'The Default Current Order'}
+      currentOrder: {}
     }));
   });
 
@@ -258,6 +258,25 @@ describe('reducer', () => {
       expect(nextState).to.equal(initialState);
     });
 
+  });
+
+  it('handles SET_CUSTOMER', () => {
+    const initialState = fromJS({
+      orders: [
+        {id: 1, name: 'Pizza'}
+      ]
+    });
+    const action = {
+      type: 'SET_CUSTOMER',
+      customer: new Map({id: 1, name: 'Brian'})
+    };
+
+    const nextState = reducer(initialState, action);
+
+    expect(nextState).to.equal(fromJS({
+      orders: [{id: 1, name: 'Pizza'}],
+      customer: {id: 1, name: 'Brian'}
+    }));
   });
 
   //

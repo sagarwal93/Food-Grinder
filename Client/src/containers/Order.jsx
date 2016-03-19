@@ -11,12 +11,12 @@ export const Order = React.createClass({
 
   render () {
     const order = this.props.currentOrder;
-
     return (
       <div>
         {
           order.size ?
-          <OrderCurrent currentOrder={order}/>
+          <OrderCurrent showNextOrder={this.showNextOrder}
+            {...this.props}/>
           :
           <div>
             No order exists
@@ -32,7 +32,9 @@ export const Order = React.createClass({
 
 function mapStateToProps(state) {
   return {
-    currentOrder: state.get('currentOrder')
+    currentOrder: state.get('currentOrder'),
+    orders: state.get('orders'),
+    customer: state.get('customer')
   };
 }
 
