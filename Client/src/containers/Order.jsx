@@ -22,7 +22,7 @@ export const Order = React.createClass({
             No order exists
           </div>
         }
-        <button onClick={() => this.showNextOrder()}>
+        <button onClick={this.showNextOrder}>
           Get Next Order
         </button>
       </div>
