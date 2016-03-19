@@ -5,8 +5,11 @@ const Navigation = React.createClass({
   render () {
     return (
       <header>
-        <Link to='order'>Current Order</Link>
-        <Link to='orders'>Favorites</Link>
+        <ul>
+          <li><Link to='order'>Current Order</Link></li>
+          <li><Link to='orders'>Favorites</Link></li>
+          <li><Link to='login'>Login</Link></li>
+        </ul>
       </header>
     );
   }
