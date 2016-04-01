@@ -78,6 +78,30 @@ export function getCustomer(state, username) {
   return null;
 }
 
+function filterOrdersForDietaryPreference(orders, dietaryTag) {
+  return orders.filter(order => {
+    const orderTags = order.get('dietaryTags');
+    if (orderTags) {
+      return order.get('dietaryTags').indexOf(dietaryTag) >= 0;
+    }
+    return false;
+  });
+}
+
+export function getOrders(state, username) {
+  const customer = getCustomer(state, username);
+  var orders = state.get('orders');
+  if (customer) {
+    const customerTags = customer.get('dietaryTags');
+    if (customerTags) {
+      for (var customerTag of customerTags) {
+        orders = filterOrdersForDietaryPreference(orders, customerTag);
+      }
+    }
+  }
+  return orders;
+}
+
 export function voteOrder(state, customerId, orderId, like) {
   const order = getOrderById(state, orderId);
   if (!order) {
