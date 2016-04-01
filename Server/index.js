@@ -5,8 +5,8 @@ export const store = makeStore();
 startServer(store);
 
 store.dispatch({
-  type: 'SET_CUSTOMER',
-  customer: require('./customers.json')
+  type: 'SET_CUSTOMERS',
+  customers: require('./customers.json')
 });
 
 esclient.search({
