@@ -18,11 +18,17 @@ module.exports = {
       loader: 'react-hot!babel'
     }, {
       test: /\.css$/,
-      loader: 'style!css!autoprefixer?browsers=last 2 versions'
-    }]
+      loader: 'style-loader!css-loader'
+    },
+    {test: /materialize-css\/dist\/js\/materialize\.js/, loader: 'imports?materializecss'},
+    {test: /.(png|woff(2)?|eot|ttf|svg)(\?[a-z0-9=\.]+)?$/, loader: 'url-loader?limit=100000'}]
   },
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    alias: {
+      materializecss: 'materialize-css/dist/css/materialize.css',
+      materialize: 'materialize-css/dist/js/materialize.js'
+    },
+    extensions: ['', '.js', '.jsx', '.css']
   },
   output: {
     path: __dirname + '/dist',
@@ -34,6 +40,10 @@ module.exports = {
     hot: true
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery'
+    })
   ]
 };

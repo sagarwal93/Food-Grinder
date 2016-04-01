@@ -17,6 +17,8 @@ import {LoginContainer} from './containers/Login';
 
 
 require('./style.css');
+require('materialize-css/dist/css/materialize.css');
+
 
 const socket = io(`${location.protocol}//${location.hostname}:8090`);
 socket.on('state', state => {
