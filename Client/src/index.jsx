@@ -9,7 +9,7 @@ import {setClientId, setState, setCustomer, setConnectionState} from './action_c
 import remoteActionMiddleware from './remote_action_middleware';
 import getClientId from './client_id';
 import App from './components/App';
-import {VotingContainer} from './components/Voting';
+// import {VotingContainer} from './components/Voting';
 import {ResultsContainer} from './components/Results';
 import {OrdersContainer} from './containers/Orders';
 import {OrderContainer} from './containers/Order';
@@ -48,7 +48,7 @@ const store = createStoreWithMiddleware(reducer);
 store.dispatch(setClientId(getClientId()));
 
 const routes = <Route component={App}>
-  <Route path="/" component={VotingContainer} />
+  <Route path="/" component={LoginContainer} />
   <Route path="/results" component={ResultsContainer} />
   <Route path="/orders" component={OrdersContainer} />
   <Route path="/order" component={OrderContainer} />
