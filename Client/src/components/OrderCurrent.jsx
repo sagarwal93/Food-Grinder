@@ -20,9 +20,15 @@ export default React.createClass({
           <div className="card">
             <div className="card-image">
               <img src="images/burger.png" />
-              <span className="card-title">{this.props.currentOrder.get('name')}</span>
             </div>
             <div className="card-content">
+              <span className="card-title">
+                {this.props.currentOrder.get('name')}
+                <i className="material-icons right">more_vert</i>
+              </span>
+              <span className="card-title grey-text right">
+                ${this.props.currentOrder.get('price')}
+              </span>
               <p>{this.props.currentOrder.get('description')}</p>
             </div>
             <div className="card-action">
