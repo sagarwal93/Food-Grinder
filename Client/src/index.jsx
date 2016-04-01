@@ -5,7 +5,7 @@ import {createStore, applyMiddleware, compose} from 'redux';
 import {Provider} from 'react-redux'; //eslint-disable-line
 import io from 'socket.io-client';
 import reducer from './reducer';
-import {setClientId, setState, setCustomer, setConnectionState} from './action_creators';
+import {setClientId, setState, setCustomer, setOrders, setConnectionState} from './action_creators';
 import remoteActionMiddleware from './remote_action_middleware';
 import getClientId from './client_id';
 import App from './components/App';
@@ -27,6 +27,10 @@ socket.on('state', state => {
 
 socket.on('customer', customer => {
   store.dispatch(setCustomer(customer)); //eslint-disable-line
+});
+
+socket.on('orders', orders => {
+  store.dispatch(setOrders(orders)); //eslint-disable-line
 });
 
 [

@@ -119,6 +119,22 @@ describe('application logic', () => {
 
   describe('getOrders', () => {
 
+    it('returns all orders if username is null', () => {
+      const state = fromJS({
+        orders: [{id: 1, name: 'Pizza'},
+                 {id: 2, name: 'Salad', dietaryTags: ['Vegan']},
+                 {id: 3, name: 'Cake', dietaryTags: ['Dessert', 'Chocolate']}],
+        customers: [{id: 1, username: 'bsquared', name: 'Brian'},
+                    {id: 2, username: 'lesIsMore', name: 'Les', dietaryTags: ['Dessert']}]
+      });
+      const orders = getOrders(state, null);
+      expect(orders).to.equal(
+        fromJS([{id: 1, name: 'Pizza'},
+                {id: 2, name: 'Salad', dietaryTags: ['Vegan']},
+                {id: 3, name: 'Cake', dietaryTags: ['Dessert', 'Chocolate']}])
+      );
+    });
+
     it('returns all orders if a customer has no dietary preferences', () => {
       const state = fromJS({
         orders: [{id: 1, name: 'Pizza'},
