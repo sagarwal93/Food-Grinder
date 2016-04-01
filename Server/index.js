@@ -6,7 +6,7 @@ startServer(store);
 
 store.dispatch({
   type: 'SET_CUSTOMER',
-  customer: require('./customer.json')
+  customer: require('./customers.json')
 });
 
 esclient.search({
