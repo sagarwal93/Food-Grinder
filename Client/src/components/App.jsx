@@ -6,8 +6,10 @@ export default React.createClass({
   render: function() {
     return <div>
       <Navigation />
-      <ConnectionStateContainer />
-      {this.props.children}
+      <div className="container">
+        <ConnectionStateContainer />
+        {this.props.children}
+      </div>
     </div>;
   }
 });
