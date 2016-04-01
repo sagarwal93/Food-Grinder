@@ -8,7 +8,7 @@ const Navigation = React.createClass({
         <div className="nav-wrapper container"><a id="logo-container" href="#" className="brand-logo">Chewsier</a>
           <ul className="right hide-on-med-and-down">
             <li><Link to='order'>Current Order</Link></li>
-            <li><Link to='orders'>Favorites</Link></li>
+            <li><Link to='orders'>Orders</Link></li>
             <li><Link to='login'>Login</Link></li>
           </ul>
 

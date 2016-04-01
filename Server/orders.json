@@ -32,5 +32,11 @@
     "name":"Apple Pecan Chicken Salad (Full Size)",
     "description": "Sink your fork into crispy hand-picked red and green apples, roasted pecans, sweet dried cranberries and real blue cheese crumbles. Then we add tender grilled chicken and pomegranate vinaigrette dressing to the mix for a sweet combination, perfect for any meal.",
     "price": 6.99
+  },
+  {
+    "id":4,
+    "name": "Burrito Bowl",
+    "description": "It's a burrito, but in a bowl!",
+    "price": 6.69
   }
 ]
