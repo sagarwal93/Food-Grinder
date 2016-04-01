@@ -1,3 +1,6 @@
-[{"id":1, "username":"bsquared","name":"Brian"},
-  {"id":2, "username":"lesIsMore", "name":"Les"},
-  {"id":2, "username":"theboss", "name":"Daniel"}]
+[
+  {"id":1, "username":"bsquared","name":"Brian", "favorites": [1,2]},
+  {"id":2, "username":"lesIsMore", "name":"Les", "favorites": [3]},
+  {"id":2, "username":"theboss", "name":"Daniel", "favorites": []},
+  {"id":2, "username":"john", "name":"John", "favorites": [4], "dietaryTags": ["Vegan"]}
+]

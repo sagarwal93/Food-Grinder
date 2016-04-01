@@ -1,7 +1,7 @@
 import React from 'react'; //eslint-disable-line
 import ReactDOM from 'react-dom';
 import {Router, Route, hashHistory} from 'react-router'; //eslint-disable-line
-import {createStore, applyMiddleware} from 'redux';
+import {createStore, applyMiddleware, compose} from 'redux';
 import {Provider} from 'react-redux'; //eslint-disable-line
 import io from 'socket.io-client';
 import reducer from './reducer';
@@ -9,14 +9,16 @@ import {setClientId, setState, setCustomer, setConnectionState} from './action_c
 import remoteActionMiddleware from './remote_action_middleware';
 import getClientId from './client_id';
 import App from './components/App';
-import {VotingContainer} from './components/Voting';
+// import {VotingContainer} from './components/Voting';
 import {ResultsContainer} from './components/Results';
 import {OrdersContainer} from './containers/Orders';
 import {OrderContainer} from './containers/Order';
 import {LoginContainer} from './containers/Login';
 
 
-require('./style.css');
+// require('./style.css');
+require('materialize-css/dist/css/materialize.css');
+
 
 const socket = io(`${location.protocol}//${location.hostname}:8090`);
 socket.on('state', state => {
@@ -39,14 +41,16 @@ socket.on('customer', customer => {
   socket.on(ev, () => store.dispatch(setConnectionState(ev, socket.connected))) //eslint-disable-line
 );
 
-const createStoreWithMiddleware = applyMiddleware(
-  remoteActionMiddleware(socket)
-)(createStore);
+const createStoreWithMiddleware =
+  compose(
+    applyMiddleware(remoteActionMiddleware(socket)),
+    window.devToolsExtension ? window.devToolsExtension() : f => f
+  )(createStore);
 const store = createStoreWithMiddleware(reducer);
 store.dispatch(setClientId(getClientId()));
 
 const routes = <Route component={App}>
-  <Route path="/" component={VotingContainer} />
+  <Route path="/" component={LoginContainer} />
   <Route path="/results" component={ResultsContainer} />
   <Route path="/orders" component={OrdersContainer} />
   <Route path="/order" component={OrderContainer} />

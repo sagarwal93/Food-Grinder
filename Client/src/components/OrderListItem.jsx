@@ -5,9 +5,11 @@ export default React.createClass({
   mixins: [PureRenderMixin],
   render () {
     const {order} = this.props;
-    return <li className="order-list-item"
-      onClick={this.props.setCurrentOrder.bind(this, order)}>
-      {order.get('name')}
-    </li>;
+    return <div className='col s12 m4 l6'>
+      <div onClick={this.props.setCurrentOrder.bind(this, order)}
+        className='card'>
+        {order.get('name')}
+      </div>
+    </div>;
   }
 });

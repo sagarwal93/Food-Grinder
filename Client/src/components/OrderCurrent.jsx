@@ -15,21 +15,29 @@ export default React.createClass({
     this.props.showNextOrder();
   },
   render () {
-    return <div className="current-order">
-      <div>
-        {this.props.currentOrder.get('name')}
-      </div>
-      <div>
-        {this.props.currentOrder.get('description')}
-      </div>
-      <div>
-        {this.props.currentOrder.get('price')}
-      </div>
-      <div>
-        <button onClick={this.rejectOrder}>Reject</button>
-        <button onClick={this.favoriteOrder}>Favorite</button>
-      </div>
-      <button>Order Now</button>
-    </div>;
+    return <div className="row">
+        <div className="col s12 m10 offset-m1">
+          <div className="card">
+            <div className="card-image">
+              <img src="images/burger.png" />
+              <span className="card-title">{this.props.currentOrder.get('name')}</span>
+            </div>
+            <div className="card-content">
+              <p>{this.props.currentOrder.get('description')}</p>
+            </div>
+            <div className="card-action">
+              <a className="waves-effect waves-teal" onClick={this.rejectOrder}>
+                <i className="small material-icons">delete</i>
+              </a>
+              <a className="waves-effect waves-teal" onClick={this.favoriteOrder}>
+                <i className="small material-icons">grade</i>
+              </a>
+              <a className="waves-effect waves-teal teal-text right" onClick={this.favoriteOrder}>
+                Order Now!
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>;
   }
 });

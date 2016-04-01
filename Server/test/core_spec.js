@@ -1,7 +1,7 @@
 import {List, Map, fromJS} from 'immutable';
 import {expect} from 'chai';
 
-import {setOrders, setCustomers, getCustomer, voteOrder} from '../src/core';
+import {setOrders, setCustomers, getCustomer, getOrders, voteOrder} from '../src/core';
 
 describe('application logic', () => {
 
@@ -113,6 +113,40 @@ describe('application logic', () => {
       });
       const customer = getCustomer(state, 'lesIsMore');
       expect(customer).to.equal(null);
+    });
+
+  });
+
+  describe('getOrders', () => {
+
+    it('returns all orders if a customer has no dietary preferences', () => {
+      const state = fromJS({
+        orders: [{id: 1, name: 'Pizza'},
+                 {id: 2, name: 'Salad', dietaryTags: ['Vegan']},
+                 {id: 3, name: 'Cake', dietaryTags: ['Dessert', 'Chocolate']}],
+        customers: [{id: 1, username: 'bsquared', name: 'Brian'},
+                    {id: 2, username: 'lesIsMore', name: 'Les', dietaryTags: ['Dessert']}]
+      });
+      const orders = getOrders(state, 'bsquared');
+      expect(orders).to.equal(
+        fromJS([{id: 1, name: 'Pizza'},
+                {id: 2, name: 'Salad', dietaryTags: ['Vegan']},
+                {id: 3, name: 'Cake', dietaryTags: ['Dessert', 'Chocolate']}])
+      );
+    });
+
+    it('returns only orders that match the customer dietary preferences', () => {
+      const state = fromJS({
+        orders: [{id: 1, name: 'Pizza'},
+                 {id: 2, name: 'Salad', dietaryTags: ['Vegan']},
+                 {id: 3, name: 'Cake', dietaryTags: ['Dessert', 'Chocolate']}],
+        customers: [{id: 1, username: 'bsquared', name: 'Brian'},
+                    {id: 2, username: 'lesIsMore', name: 'Les', dietaryTags: ['Dessert']}]
+      });
+      const orders = getOrders(state, 'lesIsMore');
+      expect(orders).to.equal(
+        fromJS([{id: 3, name: 'Cake', dietaryTags: ['Dessert', 'Chocolate']}])
+      );
     });
 
   });

@@ -6,6 +6,9 @@ export default React.createClass({
   render () {
     return <div className="current-customer">
       <div>
+        {this.props.customer.get('username')}
+      </div>
+      <div>
         {this.props.customer.get('name')}
       </div>
     </div>;

@@ -1,9 +1,9 @@
 [
   {
     "id":1,
-    "name":"1/4 Lb. Single Burger",
-    "company":"Wendy's",
-    "description":"A quarter-pound of 100% real beef and the freshest premium toppings on warm, toasted buns.",
+    "name":"Gargantuan Burger",
+    "company":"Burger Town",
+    "description":"A pound of 100% real beef and the freshest premium toppings on warm, toasted buns.",
     "dietaryTags": [
       "No Poultry",
       "No Pork",
@@ -23,7 +23,8 @@
     "geolocation": {
       "lat": 33.777582,
       "lon": -84.388508
-    }
+    },
+    "image": "images/burger.png"
   },
   {
     "id":2,
@@ -33,16 +34,34 @@
     "geolocation": {
       "lat": 33.776806,
       "lon": -84.388647
-    }
+    },
+    "image": "images/salad_ranch.jpg"
   },
   {
     "id":3,
-    "name":"Apple Pecan Chicken Salad (Full Size)",
+    "name":"Apple Walnut Chicken Salad (Full Size)",
     "description": "Sink your fork into crispy hand-picked red and green apples, roasted pecans, sweet dried cranberries and real blue cheese crumbles. Then we add tender grilled chicken and pomegranate vinaigrette dressing to the mix for a sweet combination, perfect for any meal.",
     "price": 6.99,
     "geolocation": {
       "lat": 33.844411,
       "lon": -84.363930
-    }
+    },
+    "image": "images/apple.jpg"
+  },
+  {
+    "id":4,
+    "name":"Vegan Lettuce Wrap",
+    "description": "Tofu lettuce wrap with tomatoes, avocado, and bean sprouts.",
+    "dietaryTags": [
+      "Vegan"
+    ],
+    "price": 5.99,
+    "image": "images/burger.png"
+  },
+  {
+    "name": "Burrito Bowl",
+    "description": "It's a burrito, but in a bowl!",
+    "price": 6.69,
+    "image": "images/burger.png"
   }
 ]

@@ -7,13 +7,13 @@ export default React.createClass({
   render () {
     const {orders} = this.props;
     return (
-      <ul>
+      <div className='row'>
         {
           orders.map(order => {
             return <OrderListItem key={order.get('id')} order={order} setCurrentOrder={this.props.setCurrentOrder}/>;
           })
         }
-      </ul>
+      </div>
     );
 
   }
