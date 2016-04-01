@@ -1,7 +1,7 @@
 import React from 'react'; //eslint-disable-line
 import ReactDOM from 'react-dom';
 import {Router, Route, hashHistory} from 'react-router'; //eslint-disable-line
-import {createStore, applyMiddleware} from 'redux';
+import {createStore, applyMiddleware, compose} from 'redux';
 import {Provider} from 'react-redux'; //eslint-disable-line
 import io from 'socket.io-client';
 import reducer from './reducer';
@@ -41,9 +41,11 @@ socket.on('customer', customer => {
   socket.on(ev, () => store.dispatch(setConnectionState(ev, socket.connected))) //eslint-disable-line
 );
 
-const createStoreWithMiddleware = applyMiddleware(
-  remoteActionMiddleware(socket)
-)(createStore);
+const createStoreWithMiddleware =
+  compose(
+    applyMiddleware(remoteActionMiddleware(socket)),
+    window.devToolsExtension ? window.devToolsExtension() : f => f
+  )(createStore);
 const store = createStoreWithMiddleware(reducer);
 store.dispatch(setClientId(getClientId()));
 

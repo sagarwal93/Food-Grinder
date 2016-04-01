@@ -41,5 +41,10 @@
       "Vegan"
     ],
     "price": 5.99
+  },
+  {
+    "name": "Burrito Bowl",
+    "description": "It's a burrito, but in a bowl!",
+    "price": 6.69
   }
 ]
