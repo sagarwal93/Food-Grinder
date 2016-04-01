@@ -16,7 +16,7 @@ import {OrderContainer} from './containers/Order';
 import {LoginContainer} from './containers/Login';
 
 
-require('./style.css');
+// require('./style.css');
 require('materialize-css/dist/css/materialize.css');
 
 
