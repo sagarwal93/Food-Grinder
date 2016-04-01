@@ -68,6 +68,16 @@ function setCustomer(state, customer) {
   return state;
 }
 
+function setOrders(state, orders) {
+  console.log(orders); //eslint-disable-line
+  if (orders) {
+    return state.merge({
+      orders
+    });
+  }
+  return state;
+}
+
 export default function(state = defaultState, action) {
   switch (action.type) {
     case 'SET_CLIENT_ID':
@@ -82,6 +92,8 @@ export default function(state = defaultState, action) {
       return setCurrentOrder(state, action.order);
     case 'SET_CUSTOMER':
       return setCustomer(state, action.customer);
+    case 'SET_ORDERS':
+      return setOrders(state, action.orders);
     case 'VOTE':
       return vote(state, action.entry);
     default:

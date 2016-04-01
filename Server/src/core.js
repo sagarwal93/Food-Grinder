@@ -89,13 +89,15 @@ function filterOrdersForDietaryPreference(orders, dietaryTag) {
 }
 
 export function getOrders(state, username) {
-  const customer = getCustomer(state, username);
   var orders = state.get('orders');
-  if (customer) {
-    const customerTags = customer.get('dietaryTags');
-    if (customerTags) {
-      for (var customerTag of customerTags) {
-        orders = filterOrdersForDietaryPreference(orders, customerTag);
+  if (username) {
+    const customer = getCustomer(state, username);
+    if (customer) {
+      const customerTags = customer.get('dietaryTags');
+      if (customerTags) {
+        for (var customerTag of customerTags) {
+          orders = filterOrdersForDietaryPreference(orders, customerTag);
+        }
       }
     }
   }

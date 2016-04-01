@@ -40,6 +40,13 @@ export function setCustomer(customer) {
   };
 }
 
+export function setOrders(orders) {
+  return {
+    type: 'SET_ORDERS',
+    orders: orders
+  };
+}
+
 export function vote(entry) {
   return {
     meta: {remote: true},

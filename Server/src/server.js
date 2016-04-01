@@ -11,16 +11,26 @@ export function startServer(store) {
   // );
 
   io.on('connection', (socket) => {
-    socket.emit('state', store.getState().toJS());
+    // socket.emit('state', store.getState().toJS());
+    socket.emit('orders', store.getState().get('orders').toJS());
+
     socket.on('action', () => {
       store.dispatch.bind(store);
     });
+
     socket.on('fetch', (data) => {
-      console.log(data);
       const retVal = fetch(store.getState(), data);
-      console.log(retVal);
-      io.emit('customer', retVal.toJS());
-      return retVal;
+      switch (data.type) {
+        case 'GET_CUSTOMER':
+          io.emit('customer', retVal.toJS());
+          break;
+        case 'GET_ORDERS':
+          io.emit('orders', retVal.toJS());
+          break;
+        default:
+          io.emit('fail', retVal.toJS());
+          break;
+      }
     });
   });
 }
