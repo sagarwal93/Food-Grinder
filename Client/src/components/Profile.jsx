@@ -5,12 +5,9 @@ export default React.createClass({
   mixins: [PureRenderMixin],
   render () {
     return <div className="current-customer">
-      <div>
-        {this.props.customer.get('username')}
-      </div>
-      <div>
-        {this.props.customer.get('name')}
-      </div>
+      <h2 style={{textAlign: 'center', fontFamily: 'verdana'}}>
+        Welcome, {this.props.customer.get('name')}
+      </h2>
     </div>;
   }
 });
