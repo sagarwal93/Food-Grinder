@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import * as actionCreators from '../action_creators';
 import Profile from './../components/Profile'; //eslint-disable-line
 import OrderList from './../components/OrderList'; //eslint-disable-line
+import {hashHistory} from 'react-router';
 
 export const Login = React.createClass({
   showCustomer() {
@@ -13,6 +14,8 @@ export const Login = React.createClass({
     event.preventDefault();
     const input = this.refs.username;
     this.props.getCustomer(input.value);
+
+    hashHistory.push('orders');
   },
   render () {
     const {customer} = this.props;
@@ -26,12 +29,6 @@ export const Login = React.createClass({
         }}>
           Log in
         </div>
-        {customer &&
-          <div>
-          <Profile customer={customer}/>
-          <OrderList {...this.props} />
-          </div>
-        }
         {!customer &&
           <div>
             <form className="login-form form-inline" onSubmit={this.handleSubmit}>
@@ -47,6 +44,13 @@ export const Login = React.createClass({
     );
   }
 });
+
+// {customer &&
+//   <div>
+//   <Profile customer={customer}/>
+//   <OrderList {...this.props} />
+//   </div>
+// }
 
 function mapStateToProps(state) {
   const customer = state.get('customer');
