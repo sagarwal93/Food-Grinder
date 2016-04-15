@@ -46,7 +46,9 @@ export default React.createClass({
       <CardMedia style={styles.test}>
         <img src={order.image} style={styles.img}/>
       </CardMedia>
-      <CardActions>
+      <CardActions style={{
+        textAlign: 'center'
+      }}>
         <FlatButton style={styles.deleteButton} onClick={this.showNextOrder}
           icon={<FontIcon className="material-icons">thumb_down</FontIcon>}/>
         <RaisedButton label="Order Now" style={styles.orderNowButton} backgroundColor='#FF5722'labelColor='#FFFFFF'/>
