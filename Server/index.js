@@ -11,7 +11,7 @@ store.dispatch({
 
 store.dispatch({
   type: 'SET_CUSTOMERS',
-  customer: require('./customers.json')
+  customers: require('./customers.json')
 });
 
 // esclient.search({

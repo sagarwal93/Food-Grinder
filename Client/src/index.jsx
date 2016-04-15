@@ -16,9 +16,9 @@ import {OrderContainer} from './containers/Order';
 import {LoginContainer} from './containers/Login';
 
 const socket = io(`${location.protocol}//${location.hostname}:8090`);
-// socket.on('state', state => {
-//   store.dispatch(setState(state)); //eslint-disable-line
-// });
+socket.on('state', state => {
+  store.dispatch(setState(state)); //eslint-disable-line
+});
 
 socket.on('customer', customer => {
   store.dispatch(setCustomer(customer)); //eslint-disable-line
