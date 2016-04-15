@@ -35,10 +35,11 @@ export default React.createClass({
       }
     };
     return <Card>
-      <CardMedia>
+      <CardMedia
+        overlay={<CardTitle title={order.name} subtitle={order.company} />}
+      >
         <img src={order.image} />
       </CardMedia>
-      <CardTitle title={order.name} subtitle={order.company} />
       <CardText expandable={false}>
         {order.description}
       </CardText>
