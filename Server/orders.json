@@ -1,68 +1,104 @@
 [
   {
     "id":1,
-    "name":"Gargantuan Burger",
-    "company":"Burger Town",
-    "description":"A pound of 100% real beef and the freshest premium toppings on warm, toasted buns.",
+    "name":"BBQ Ranch Chicken Salad",
+    "company":"Wendy's",
+    "description":"Taste big flavor that truly stands alone with fire-roasted corn, Applewood Smoked Bacon, warm grilled chicken, diced tomatoes and Marzetti® Simply Dressed® BBQ Ranch Dressing.",
     "dietaryTags": [
-      "No Poultry",
-      "No Pork",
-      "No Seafood"
+      "Poultry",
+      "Pork",
+      "Dairy"
     ],
     "modifiers": [
-      "Bun",
-      "Mayo",
-      "Ketchup",
-      "Pickle",
-      "Red onoin",
-      "Lettuce",
-      "Tomato",
-      "American Cheese"
+      "Dressing",
+      "Pecans",
+      "Bacon",
+      "Onions",
+      "Cheese"
     ],
-    "price": 5.59,
+    "price": 6.99,
     "geolocation": {
       "lat": 33.777582,
       "lon": -84.388508
     },
-    "image": "images/burger.png"
+    "image": "images/Wendys_BbqRanchChickenSalad.png"
   },
   {
     "id":2,
-    "name":"BBQ Ranch Chicken Salad (Full Size)",
-    "description":"Taste big flavor that truly stands alone with fire-roasted corn, Applewood Smoked Bacon, warm grilled chicken, diced tomatoes and Marzetti® Simply Dressed® BBQ Ranch Dressing.",
-    "price": 6.99,
+    "name":"Pepperoni Pizza",
+    "company":"Papa Murphy's",
+    "description":"Our Original Crust topped with Traditional Red Sauce, Whole-Milk Mozzarella and Premium Pepperoni.",
+    "dietaryTags": [
+      "Dairy",
+      "Pork",
+      "Beef"
+    ],
+    "modifiers": [
+      "Pepperoni",
+      "Mozzarella Cheese",
+      "Traditional Red Sauce"
+    ],
+    "price": 16.00,
     "geolocation": {
       "lat": 33.776806,
       "lon": -84.388647
     },
-    "image": "images/salad_ranch.jpg"
+    "image": "images/PapaMurphys_Pepperoni.png"
   },
   {
     "id":3,
-    "name":"Apple Walnut Chicken Salad (Full Size)",
-    "description": "Sink your fork into crispy hand-picked red and green apples, roasted pecans, sweet dried cranberries and real blue cheese crumbles. Then we add tender grilled chicken and pomegranate vinaigrette dressing to the mix for a sweet combination, perfect for any meal.",
-    "price": 6.99,
+    "name":"Spicy Chicken Sandwich",
+    "company":"Chick-fil-A",
+    "description": "A boneless breast of chicken seasoned with a spicy blend of peppers, hand-breaded, pressure cooked in 100% refined peanut oil and served on a toasted, buttered bun with dill pickle chips. Also available on a Golden Wheat Bun.",
+    "dietaryTags": [
+      "Peanuts",
+      "Dairy",
+      "Poultry"
+    ],
+    "modifiers": [
+      "Pickles"
+    ],
+    "price": 3.69,
     "geolocation": {
       "lat": 33.844411,
       "lon": -84.363930
     },
-    "image": "images/apple.jpg"
+    "image": "images/CFA_SpicyChickenSandwich.png"
   },
   {
     "id":4,
-    "name":"Vegan Lettuce Wrap",
-    "description": "Tofu lettuce wrap with tomatoes, avocado, and bean sprouts.",
+    "name":"Chicken Quesadillas",
+    "company":"Buffalo Wild Wings",
+    "description": "A grilled flour tortilla stuffed with Cajun-seasoned grilled chicken, pico de gallo and a blend of cheeses.",
     "dietaryTags": [
-      "Vegan"
+      "Poultry",
+      "Dairy"
     ],
-    "price": 5.99,
-    "image": "images/lettuceWrap.png"
+    "modifiers": [
+      "Cajun Seasoning",
+      "Pico de Gallo"
+    ],
+    "price": 7.49,
+    "image": "images/BWW_Quesadillas.png"
   },
   {
     "id":5,
-    "name": "Burrito Bowl",
-    "description": "It's a burrito, but in a bowl!",
-    "price": 6.69,
-    "image": "images/burritoBowl.png"
+    "name":"10 Kentucky Nuggets",
+    "company":"KFC",
+    "description": "Our signature Kentucky Nuggets are made with 100% breast chicken, coated in the secret recipes of 11 herbs and spices, and cooked until golden brown. Includes BBQ Dipping Sauce.",
+    "dietaryTags": [
+      "Poultry"
+    ],
+    "price": 8.95,
+    "image": "images/KFC_10KentuckyNuggets.png"
+  },
+  {
+    "id":6,
+    "name":"Hummus Trio",
+    "company":"Zoe's Kitchen",
+    "description": "You'll love our hummus! Try three varieties: basil pesto, red pepper and classic hummus. Served with pita bread, olives, and cucumbers.",
+    "dietaryTags": [],
+    "price": 6.89,
+    "image": "images/ZoesKitchenHummusTrio.png"
   }
 ]
