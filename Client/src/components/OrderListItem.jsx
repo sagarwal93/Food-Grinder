@@ -11,13 +11,14 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 export default React.createClass({
   mixins: [PureRenderMixin],
   render () {
-    const {order} = this.props;
+    const order = this.props.order.toJS();
     return <Card>
-    <CardMedia
-      overlay={<CardTitle title={order.get('name')} subtitle="Overlay subtitle" />}
-    >
-      <img src="http://lorempixel.com/600/337/nature/" />
-    </CardMedia>
+      <CardHeader
+        title={order.name}
+        subtitle={order.company}
+        avatar={order.image}
+        showExpandableButton={true}
+      />
   </Card>;
   }
 });
