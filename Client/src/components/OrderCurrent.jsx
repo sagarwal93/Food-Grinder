@@ -16,39 +16,48 @@ export default React.createClass({
     this.props.favoriteOrderForCustomer(this.props.currentOrder);
     this.props.showNextOrder();
   },
-  rejectOrder() {
-    this.props.showNextOrder();
+  showNextOrder() {
+    this.props.nextOrder();
   },
   render () {
     const order = this.props.currentOrder.toJS();
     const styles = {
-      fullwidth: {
-        margin: '20px 0 0 0',
-        width: '100%'
+      favoriteButton: {
+        margin: '0px 0 0 0',
+        minWidth: '40px',
+        color: '#999'
       },
-      halfwidth: {
-        width: '46%'
+      deleteButton: {
+        margin: '0px 0 0 0',
+        minWidth: '60px',
+        width: '60px',
+        color: '#999'
+      },
+      orderNowButton: {
+        margin: '0px 0 0 0',
+        width: '60%',
+        backgroundColor: '#33CC33'
+      },
+      img: {
+        // height: '300px'
       }
     };
     return <Card>
-      <CardMedia
-        overlay={<CardTitle title={order.name} subtitle={order.company} />}
-      >
-        <img src={order.image} />
+      <CardMedia style={styles.test}>
+        <img src={order.image} style={styles.img}/>
       </CardMedia>
+      <CardActions>
+        <FlatButton style={styles.deleteButton} onClick={this.showNextOrder}
+          icon={<FontIcon className="material-icons">thumb_down</FontIcon>}/>
+        <RaisedButton label="Order Now" style={styles.orderNowButton} backgroundColor='#FF5722'labelColor='#FFFFFF'/>
+        <FlatButton style={styles.favoriteButton} onClick={this.favoriteOrder}
+          icon={<FontIcon className="material-icons">thumb_up</FontIcon>} />
+      </CardActions>
+      <CardTitle title={order.name} subtitle={order.company} />
+
       <CardText expandable={false}>
         {order.description}
       </CardText>
-      <CardActions>
-        <FlatButton onClick={this.rejectOrder}
-          secondary={true} style={styles.halfwidth}
-          icon={<FontIcon className="material-icons">delete_forever</FontIcon>}/>
-        <FlatButton onClick={this.favoriteOrder}
-          style={styles.halfwidth}
-          icon={<FontIcon className="material-icons">favorite</FontIcon>} />
-        <br/>
-        <RaisedButton label="Order Now" primary={true} style={styles.fullwidth} />
-      </CardActions>
     </Card>;
     // return <div className="row">
     //     <div className="col s12 m10 offset-m1">
