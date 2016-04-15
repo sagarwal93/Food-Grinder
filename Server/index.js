@@ -10,7 +10,7 @@ store.dispatch({
 });
 
 store.dispatch({
-  type: 'SET_CUSTOMER',
+  type: 'SET_CUSTOMERS',
   customer: require('./customers.json')
 });
 
