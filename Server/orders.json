@@ -56,13 +56,13 @@
       "Vegan"
     ],
     "price": 5.99,
-    "image": "images/burger.png"
+    "image": "images/lettuceWrap.png"
   },
   {
     "id":5,
     "name": "Burrito Bowl",
     "description": "It's a burrito, but in a bowl!",
     "price": 6.69,
-    "image": "images/burger.png"
+    "image": "images/burritoBowl.png"
   }
 ]
