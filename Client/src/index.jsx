@@ -14,9 +14,6 @@ import {ResultsContainer} from './components/Results';
 import {OrdersContainer} from './containers/Orders';
 import {OrderContainer} from './containers/Order';
 import {LoginContainer} from './containers/Login';
-import injectTapEventPlugin from 'react-tap-event-plugin';
-
-injectTapEventPlugin();
 
 const socket = io(`${location.protocol}//${location.hostname}:8090`);
 socket.on('state', state => {

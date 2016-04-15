@@ -18,7 +18,14 @@ export const Login = React.createClass({
     const {customer} = this.props;
 
     return (
-      <div>
+      <div style={{
+        textAlign: 'center'
+      }}>
+        <div style={{
+          margin: '2.5% 0'
+        }}>
+          Log in
+        </div>
         {customer &&
           <div>
           <Profile customer={customer}/>
