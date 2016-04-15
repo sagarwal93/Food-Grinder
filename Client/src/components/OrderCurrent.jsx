@@ -31,12 +31,14 @@ export default React.createClass({
     const styles = {
       favoriteButton: {
         margin: '0px 0 0 0',
-        minWidth: '40px'
+        minWidth: '40px',
+        color: '#999'
       },
       deleteButton: {
         margin: '0px 0 0 0',
         minWidth: '60px',
-        width: '60px'
+        width: '60px',
+        color: '#999'
       },
       orderNowButton: {
         margin: '0px 0 0 0',
