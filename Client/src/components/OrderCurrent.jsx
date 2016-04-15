@@ -13,11 +13,7 @@ import FontIcon from 'material-ui/lib/font-icon'; //eslint-disable-line
 export default React.createClass({
   mixins: [PureRenderMixin],
   favoriteOrder() {
-    // const customerId = this.props.customer.get('id');
-    const customerId = 1;
-    const orderId = this.props.currentOrder.get('id');
-
-    this.props.favoriteOrderForCustomer(orderId, customerId);
+    this.props.favoriteOrderForCustomer(this.props.currentOrder);
     this.props.showNextOrder();
   },
   rejectOrder() {
@@ -44,9 +40,11 @@ export default React.createClass({
         {order.description}
       </CardText>
       <CardActions>
-        <FlatButton secondary={true} style={styles.halfwidth}
+        <FlatButton onClick={this.rejectOrder}
+          secondary={true} style={styles.halfwidth}
           icon={<FontIcon className="material-icons">delete_forever</FontIcon>}/>
-        <FlatButton style={styles.halfwidth}
+        <FlatButton onClick={this.favoriteOrder}
+          style={styles.halfwidth}
           icon={<FontIcon className="material-icons">favorite</FontIcon>} />
         <br/>
         <RaisedButton label="Order Now" primary={true} style={styles.fullwidth} />

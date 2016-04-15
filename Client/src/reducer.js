@@ -33,6 +33,24 @@ function vote(state, entry) {
 //   return state;
 // }
 
+function favoriteOrderForCustomer(state, order) {
+
+  const favs = state.getIn(['customer', 'favorites']);
+  for (let i = 0; i < favs.size; i++) {
+    if (favs.get(i) === order.get('id')) {
+      return state;
+    }
+  }
+
+  const addToFavorites = state.updateIn(['customer', 'favoriteOrders'], list => {
+    return list.push(order);
+  });
+
+  return addToFavorites.updateIn(['customer', 'favorites'], list => {
+    return list.push(order.get('id'));
+  });
+}
+
 function nextOrder(state) {
   const orders = state.get('orders');
   if (orders && orders.count() >= 1) {
@@ -86,6 +104,8 @@ export default function(state = defaultState, action) {
       return setConnectionState(state, action.state, action.connected);
     case 'SET_STATE':
       return setState(state, action.state);
+    case 'FAVORITE_ORDER':
+      return favoriteOrderForCustomer(state, action.order);
     case 'NEXT_ORDER':
       return nextOrder(state);
     case 'SET_CURRENT_ORDER':

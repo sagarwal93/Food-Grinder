@@ -69,12 +69,10 @@ export function restart() {
   };
 }
 
-export function favoriteOrderForCustomer(orderId, customerId) {
+export function favoriteOrderForCustomer(order) {
   return {
-    meta: {remote: true},
     type: 'FAVORITE_ORDER',
-    orderId: orderId,
-    customerId: customerId
+    order
   };
 }
 

@@ -43,7 +43,7 @@ export const Orders = React.createClass({
               margin: '1% 0 5% 0'
             }}
             onClick={this.showNextOrder}>
-              Browse Orders
+              Find Meals!
             </button>
           </Link>
         </div>
