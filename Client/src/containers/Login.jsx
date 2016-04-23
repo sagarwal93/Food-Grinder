@@ -4,6 +4,9 @@ import * as actionCreators from '../action_creators';
 import Profile from './../components/Profile'; //eslint-disable-line
 import OrderList from './../components/OrderList'; //eslint-disable-line
 import {hashHistory} from 'react-router';
+import TextField from 'material-ui/lib/text-field'; //eslint-disable-line
+import RaisedButton from 'material-ui/lib/raised-button'; //eslint-disable-line
+
 
 export const Login = React.createClass({
   showCustomer() {
@@ -12,10 +15,12 @@ export const Login = React.createClass({
   },
   handleSubmit(event) {
     event.preventDefault();
-    const input = this.refs.username;
-    this.props.getCustomer(input.value);
+    this.props.getCustomer(this.username);
 
     hashHistory.push('orders');
+  },
+  textFieldChange(event) {
+    this.username = event.target.value;
   },
   render () {
     const {customer} = this.props;
@@ -24,33 +29,21 @@ export const Login = React.createClass({
       <div style={{
         textAlign: 'center'
       }}>
-        <div style={{
-          margin: '2.5% 0'
-        }}>
-          Log in
-        </div>
         {!customer &&
-          <div>
-            <form className="login-form form-inline" onSubmit={this.handleSubmit}>
-              <div className="form-group">
-                <input type="text" ref="username" placeholder="Enter a username" className="form-control"/>
-              </div>
-              <button className="btn btn-success" onClick={this.handleSubmit}><i className="fa fa-sign-in"/>{' '}Log In
-              </button>
-            </form>
-          </div>
+          <form onSubmit={this.handleSubmit}>
+            <TextField
+              floatingLabelText="Username"
+              type="username"
+              onChange={this.textFieldChange}
+            />
+            <br/>
+            <RaisedButton label="Log In" onClick={this.handleSubmit} backgroundColor='#FF5722'labelColor='#FFFFFF'/>
+          </form>
         }
       </div>
     );
   }
 });
-
-// {customer &&
-//   <div>
-//   <Profile customer={customer}/>
-//   <OrderList {...this.props} />
-//   </div>
-// }
 
 function mapStateToProps(state) {
   const customer = state.get('customer');

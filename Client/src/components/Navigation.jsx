@@ -7,6 +7,8 @@ import NavigationClose from 'material-ui/lib/svg-icons/navigation/close'; //esli
 import IconMenu from 'material-ui/lib/menus/icon-menu'; //eslint-disable-line
 import MoreVertIcon from 'material-ui/lib/svg-icons/navigation/more-vert'; //eslint-disable-line
 import MenuItem from 'material-ui/lib/menus/menu-item'; //eslint-disable-line
+import Badge from 'material-ui/lib/badge'; //eslint-disable-line
+import NotificationsIcon from 'material-ui/lib/svg-icons/social/notifications'; //eslint-disable-line
 
 class Navigation extends React.Component {
 
@@ -35,7 +37,7 @@ class Navigation extends React.Component {
   render() {
     return <div style={{width: '100%', height: '100%'}}
       onClick={() => this.handleClose}>
-      <AppBar title="Chewsier" />
+      <AppBar title="Chewsier" showMenuIconButton={false} />
     </div>;
   }
 }
