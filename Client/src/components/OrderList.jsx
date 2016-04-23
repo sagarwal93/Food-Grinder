@@ -7,10 +7,7 @@ export default React.createClass({
   render () {
     const {orders} = this.props;
     return (
-      <div className='row'
-        style={{
-          margin: '0 2.5%'
-        }}>
+      <div>
         {
           orders.map(order => {
             return <OrderListItem key={order.get('id')} order={order} setCurrentOrder={this.props.setCurrentOrder}/>;

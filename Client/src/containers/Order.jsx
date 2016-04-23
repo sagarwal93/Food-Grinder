@@ -12,7 +12,7 @@ export const Order = React.createClass({
   render () {
     const order = this.props.currentOrder;
     return (
-      <div className="row">
+      <div>
         {
           order.size ?
           <OrderCurrent showNextOrder={this.showNextOrder}

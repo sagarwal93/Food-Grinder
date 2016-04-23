@@ -42,7 +42,8 @@ export default React.createClass({
         // height: '300px'
       }
     };
-    return <Card>
+    return <div>
+      <Card style={{maxWidth: '600px'}} >
       <CardMedia style={styles.test}>
         <img src={order.image} style={styles.img}/>
       </CardMedia>
@@ -60,7 +61,7 @@ export default React.createClass({
       <CardText expandable={false}>
         {order.description}
       </CardText>
-    </Card>;
+    </Card></div>;
     // return <div className="row">
     //     <div className="col s12 m10 offset-m1">
     //       <div className="card">

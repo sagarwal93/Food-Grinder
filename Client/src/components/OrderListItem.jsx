@@ -17,7 +17,7 @@ export default React.createClass({
         title={order.name}
         subtitle={order.company}
         avatar={order.image}
-        showExpandableButton={true}
+        showExpandableButton={false}
       />
   </Card>;
   }

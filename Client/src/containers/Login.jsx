@@ -9,10 +9,6 @@ import RaisedButton from 'material-ui/lib/raised-button'; //eslint-disable-line
 
 
 export const Login = React.createClass({
-  showCustomer() {
-    // this.props.setCustomer();
-    this.props.getCustomer('bsquared');
-  },
   handleSubmit(event) {
     event.preventDefault();
     this.props.getCustomer(this.username);
@@ -37,7 +33,7 @@ export const Login = React.createClass({
               onChange={this.textFieldChange}
             />
             <br/>
-            <RaisedButton label="Log In" onClick={this.handleSubmit} backgroundColor='#FF5722'labelColor='#FFFFFF'/>
+            <RaisedButton label="Log In" onClick={this.handleSubmit} backgroundColor='#FF5722' labelColor='#FFFFFF'/>
           </form>
         }
       </div>
