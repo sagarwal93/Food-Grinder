@@ -14,7 +14,7 @@ export const Orders = React.createClass({
   },
 
   showNextOrder() {
-    if (!this.props.currentOrder) {
+    if (this.props.currentOrder.size === 0) {
       this.props.nextOrder();
     }
   },

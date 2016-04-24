@@ -15,7 +15,7 @@ export default React.createClass({
   mixins: [PureRenderMixin],
   favoriteOrder() {
     this.props.favoriteOrderForCustomer(this.props.currentOrder);
-    this.props.showNextOrder();
+    this.props.nextOrder();
   },
   showNextOrder() {
     this.props.nextOrder();
