@@ -1,45 +1,38 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import * as actionCreators from '../action_creators';
+import {List} from 'immutable';
 import {Link} from 'react-router'; //eslint-disable-line
 import AppBar from 'material-ui/lib/app-bar'; //eslint-disable-line
-import LeftNav from 'material-ui/lib/left-nav'; //eslint-disable-line
-import IconButton from 'material-ui/lib/icon-button'; //eslint-disable-line
-import NavigationClose from 'material-ui/lib/svg-icons/navigation/close'; //eslint-disable-line
-import IconMenu from 'material-ui/lib/menus/icon-menu'; //eslint-disable-line
-import MoreVertIcon from 'material-ui/lib/svg-icons/navigation/more-vert'; //eslint-disable-line
-import MenuItem from 'material-ui/lib/menus/menu-item'; //eslint-disable-line
 import Badge from 'material-ui/lib/badge'; //eslint-disable-line
-import NotificationsIcon from 'material-ui/lib/svg-icons/social/notifications'; //eslint-disable-line
+import IconButton from 'material-ui/lib/icon-button'; //eslint-disable-line
+import FontIcon from 'material-ui/lib/font-icon'; //eslint-disable-line
 
-class Navigation extends React.Component {
-
-  constructor(props, context) {
-    super(props, context);
-    this.handleToggle = this.handleToggle.bind(this);
-    this.handleClose = this.handleClose.bind(this);
-
-    this.state = {
-      open: false
-    };
-  }
-
-  handleToggle() {
-    this.setState({
-      open: !this.state.open
-    });
-  }
-
-  handleClose() {
-    this.setState({
-      open: false
-    });
-  }
-
-  render() {
-    return <div style={{width: '100%', height: '100%'}}
-      onClick={() => this.handleClose}>
-      <AppBar title="Chewsier" showMenuIconButton={false} />
+export const Navigation = React.createClass({
+  render () {
+    const favorites = this.props.favorites.toJS().length || 0;
+    return <div style={{width: '100%', height: '100%'}}>
+      <AppBar
+        title='Chewsier'
+        showMenuIconButton={false}
+        iconElementRight={
+          <Badge badgeContent={favorites} primary={true} style={{padding: '8px 8px 0 0'}}>
+            <Link to='orders'>
+              <IconButton touch={true}>
+                <FontIcon className="material-icons">favorites</FontIcon>
+              </IconButton>
+            </Link>
+          </Badge>}
+        />
     </div>;
   }
+});
+
+function mapStateToProps(state) {
+  return {
+    favorites: state.getIn(['customer', 'favoriteOrders'], new List())
+  };
 }
 
-export default Navigation;
+export const NavigationContainer =
+  connect(mapStateToProps, actionCreators)(Navigation);

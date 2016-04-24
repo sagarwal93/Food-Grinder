@@ -2,8 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import OrderList from './../components/OrderList'; //eslint-disable-line
 import * as actionCreators from '../action_creators';
-import Dialog from 'material-ui/lib/dialog'; //eslint-disable-line
 import {Link} from 'react-router'; //eslint-disable-line
+import RaisedButton from 'material-ui/lib/raised-button'; //eslint-disable-line
 
 export const Orders = React.createClass({
 
@@ -14,7 +14,9 @@ export const Orders = React.createClass({
   },
 
   showNextOrder() {
-    this.props.nextOrder();
+    if (!this.props.currentOrder) {
+      this.props.nextOrder();
+    }
   },
 
   render () {
@@ -26,25 +28,17 @@ export const Orders = React.createClass({
           {
             this.props.customer && <div style={{
               fontSize: '24px',
-              fontFamily: 'verdana',
+              fontFamily: 'Roboto, sans-serif',
               margin: '2.5%'
             }}>
               Welcome, {this.props.customer.get('name')}
             </div>
           }
           <Link to='order'>
-            <button style={{
-              padding: '2%',
-              backgroundColor: '#FF5722',
-              color: '#fff',
-              border: '0px',
-              fontSize: '16px',
-              width: '50%',
-              margin: '1% 0 5% 0'
-            }}
-            onClick={this.showNextOrder}>
-              Find Meals!
-            </button>
+            <RaisedButton label='Find Meals!'
+              onClick={this.showNextOrder}
+              backgroundColor='#FF5722'
+              labelColor='#fff'/>
           </Link>
         </div>
         {
@@ -52,7 +46,7 @@ export const Orders = React.createClass({
           <div>
             <div style={{
               fontSize: '16px',
-              fontFamily: 'verdana',
+              fontFamily: 'Roboto, sans-serif',
               margin: '2.5%',
               textAlign: 'center'
             }}>
