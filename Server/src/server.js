@@ -2,7 +2,7 @@ import Server from 'socket.io';
 import fetch from './fetcher';
 
 export function startServer(store) {
-  const io = new Server().attach(8090);
+  const io = new Server().attach(443);
 
   // store.subscribe(
   //   () => {
