@@ -18,8 +18,13 @@ export const Order = React.createClass({
           <OrderCurrent showNextOrder={this.showNextOrder}
             {...this.props}/>
           :
-          <div>
-            No order exists
+          <div style={{
+            fontSize: '24px',
+            fontFamily: 'Roboto, sans-serif',
+            marginTop: '50px',
+            textAlign: 'center'
+          }}>
+            Thank you for participating in our demo!
           </div>
         }
       </div>

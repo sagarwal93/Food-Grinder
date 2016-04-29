@@ -56,10 +56,13 @@ function nextOrder(state) {
   if (orders && orders.count() >= 1) {
     return state.merge({
       currentOrder: orders.first(),
-      orders: orders.skip(1)
+      orders: orders.rest()
     });
   }
-  return state;
+  return state.merge({
+    currentOrder: {},
+    orders: []
+  });
 }
 
 function setCurrentOrder(state, order) {
