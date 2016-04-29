@@ -9,18 +9,21 @@ import RaisedButton from 'material-ui/lib/raised-button'; //eslint-disable-line
 
 
 export const Login = React.createClass({
+  componentDidUpdate() {
+    const {customer} = this.props;
+    if (customer) {
+      hashHistory.push('orders');
+    }
+  },
   handleSubmit(event) {
     event.preventDefault();
     this.props.getCustomer(this.username);
-
-    hashHistory.push('orders');
   },
   textFieldChange(event) {
     this.username = event.target.value;
   },
   render () {
     const {customer} = this.props;
-
     return (
       <div style={{
         textAlign: 'center'
