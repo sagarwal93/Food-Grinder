@@ -1,4 +1,4 @@
-import {Map} from 'immutable';
+import {Map, List} from 'immutable';
 import {defaultState} from './default_state';
 
 function setConnectionState(state, connectionState, connected) {
@@ -34,7 +34,6 @@ function vote(state, entry) {
 // }
 
 function favoriteOrderForCustomer(state, order) {
-
   const favs = state.getIn(['customer', 'favorites']);
   for (let i = 0; i < favs.size; i++) {
     if (favs.get(i) === order.get('id')) {
@@ -54,8 +53,12 @@ function favoriteOrderForCustomer(state, order) {
 function nextOrder(state) {
   const orders = state.get('orders');
   if (orders && orders.count() >= 1) {
+    let currentOrder = orders.first().toJS();
+    const favorites = state.getIn(['customer', 'favorites'], new List()).toJS();
+    currentOrder.isFavorite = favorites.indexOf(currentOrder.id) >= 0;
+
     return state.merge({
-      currentOrder: orders.first(),
+      currentOrder: currentOrder,
       orders: orders.rest()
     });
   }

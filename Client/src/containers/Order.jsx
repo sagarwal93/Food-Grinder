@@ -1,9 +1,16 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {hashHistory} from 'react-router';
 import * as actionCreators from '../action_creators';
 import OrderCurrent from './../components/OrderCurrent'; //eslint-disable-line
 
 export const Order = React.createClass({
+  componentDidMount() {
+    const {customer} = this.props;
+    if (!customer) {
+      hashHistory.push('login');
+    }
+  },
 
   showNextOrder() {
     this.props.nextOrder();

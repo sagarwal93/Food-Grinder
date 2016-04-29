@@ -2,11 +2,16 @@ import React from 'react';
 import {connect} from 'react-redux';
 import OrderList from './../components/OrderList'; //eslint-disable-line
 import * as actionCreators from '../action_creators';
-import {Link} from 'react-router'; //eslint-disable-line
+import {Link, hashHistory} from 'react-router'; //eslint-disable-line
 import RaisedButton from 'material-ui/lib/raised-button'; //eslint-disable-line
 
 export const Orders = React.createClass({
-
+  componentDidMount() {
+    const {customer} = this.props;
+    if (!customer) {
+      hashHistory.push('login');
+    }
+  },
   getInitialState() {
     return {
       orderCardOpen: true

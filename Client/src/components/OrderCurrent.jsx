@@ -15,7 +15,7 @@ export default React.createClass({
   mixins: [PureRenderMixin],
   favoriteOrder() {
     this.props.favoriteOrderForCustomer(this.props.currentOrder);
-    this.props.nextOrder();
+    // this.props.nextOrder();
   },
   showNextOrder() {
     this.props.nextOrder();
@@ -54,7 +54,9 @@ export default React.createClass({
           </IconButton>
         <IconButton tooltip='Favorite' iconStyle={styles.favoriteButton} style={{width: '60px', height: '60px'}}
           onClick={this.favoriteOrder}>
-          <FontIcon className='material-icons'>favorite_border</FontIcon>
+          {order.isFavorite ? <FontIcon className='material-icons'>favorite</FontIcon>
+          : <FontIcon className='material-icons'>favorite_border</FontIcon>}
+
         </IconButton>
       </CardActions>
       <CardTitle title={order.name} subtitle={order.company} style={{paddingTop: '0px'}}/>
