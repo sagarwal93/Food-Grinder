@@ -32,7 +32,8 @@ export default React.createClass({
         fontSize: '26pt'
       },
       orderNowButton: {
-        width: '60%',
+        width: '80%',
+        minWidth: '140px',
         backgroundColor: '#33CC33'
       },
       img: {
@@ -44,18 +45,19 @@ export default React.createClass({
       <CardMedia style={styles.test}>
         <img src={order.image} style={styles.img}/>
       </CardMedia>
-      <CardActions style={{textAlign: 'center'}}>
-        <IconButton tooltip='Not Interested' iconStyle={styles.deleteButton} style={{width: '60px', height: '60px'}}
-          onClick={this.showNextOrder}>
-          <FontIcon className='material-icons'>clear</FontIcon>
-        </IconButton>
+      <CardActions style={{textAlign: 'center', padding: '0px', paddingTop: '8px'}}>
         <RaisedButton label='Order Now!' style={styles.orderNowButton} backgroundColor='#FF5722'labelColor='#FFFFFF'/>
+        <br/>
+          <IconButton tooltip='Not Interested' iconStyle={styles.deleteButton} style={{width: '60px', height: '60px'}}
+            onClick={this.showNextOrder}>
+            <FontIcon className='material-icons'>clear</FontIcon>
+          </IconButton>
         <IconButton tooltip='Favorite' iconStyle={styles.favoriteButton} style={{width: '60px', height: '60px'}}
           onClick={this.favoriteOrder}>
           <FontIcon className='material-icons'>favorite_border</FontIcon>
         </IconButton>
       </CardActions>
-      <CardTitle title={order.name} subtitle={order.company} />
+      <CardTitle title={order.name} subtitle={order.company} style={{paddingTop: '0px'}}/>
       <CardText expandable={false}>
         {order.description}
       </CardText>
