@@ -48,15 +48,15 @@ export default React.createClass({
       <CardActions style={{textAlign: 'center', padding: '0px', paddingTop: '8px'}}>
         <RaisedButton label='Order Now!' style={styles.orderNowButton} backgroundColor='#FF5722'labelColor='#FFFFFF'/>
         <br/>
-          <IconButton tooltip='Not Interested' iconStyle={styles.deleteButton} style={{width: '60px', height: '60px'}}
-            onClick={this.showNextOrder}>
-            <FontIcon className='material-icons'>clear</FontIcon>
-          </IconButton>
-        <IconButton tooltip='Favorite' iconStyle={styles.favoriteButton} style={{width: '60px', height: '60px'}}
+
+        <IconButton iconStyle={styles.favoriteButton} style={{width: '60px', height: '60px'}}
           onClick={this.favoriteOrder}>
           {order.isFavorite ? <FontIcon className='material-icons'>favorite</FontIcon>
           : <FontIcon className='material-icons'>favorite_border</FontIcon>}
-
+        </IconButton>
+        <IconButton iconStyle={styles.deleteButton} style={{width: '60px', height: '60px'}}
+          onClick={this.showNextOrder}>
+          <FontIcon className='material-icons'>clear</FontIcon>
         </IconButton>
       </CardActions>
       <CardTitle title={order.name} subtitle={order.company} style={{paddingTop: '0px'}}/>

@@ -33,22 +33,6 @@ function vote(state, entry) {
 //   return state;
 // }
 
-function favoriteOrderForCustomer(state, order) {
-  const favs = state.getIn(['customer', 'favorites']);
-  for (let i = 0; i < favs.size; i++) {
-    if (favs.get(i) === order.get('id')) {
-      return state;
-    }
-  }
-
-  const addToFavorites = state.updateIn(['customer', 'favoriteOrders'], list => {
-    return list.push(order);
-  });
-
-  return addToFavorites.updateIn(['customer', 'favorites'], list => {
-    return list.push(order.get('id'));
-  });
-}
 
 function nextOrder(state) {
   const orders = state.get('orders');
@@ -67,6 +51,26 @@ function nextOrder(state) {
     orders: []
   });
 }
+
+function favoriteOrderForCustomer(state, order) {
+  const favs = state.getIn(['customer', 'favorites']);
+  for (let i = 0; i < favs.size; i++) {
+    if (favs.get(i) === order.get('id')) {
+      return nextOrder(state);
+    }
+  }
+
+  const addToFavorites = state.updateIn(['customer', 'favoriteOrders'], list => {
+    return list.push(order);
+  });
+
+  const stateWithFavorites = addToFavorites.updateIn(['customer', 'favorites'], list => {
+    return list.push(order.get('id'));
+  });
+
+  return nextOrder(stateWithFavorites);
+}
+
 
 function setCurrentOrder(state, order) {
   if (order) {
