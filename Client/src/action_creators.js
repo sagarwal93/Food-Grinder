@@ -78,8 +78,7 @@ export function favoriteOrderForCustomer(order) {
 
 export function getCustomer(username) {
   return {
-    meta: {fetch: true},
-    type: 'GET_CUSTOMER',
-    username: username
+    type: 'SET_CUSTOMER',
+    customer: {id: 1001, username: username, name: username, favorites: [2]}
   };
 }

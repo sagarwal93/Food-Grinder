@@ -82,7 +82,6 @@ function setCurrentOrder(state, order) {
 }
 
 function setCustomer(state, customer) {
-  console.log(customer); //eslint-disable-line
   if (customer) {
     const orders = state.get('orders').toJS();
     const favoriteOrders = orders.filter(x => customer.favorites.indexOf(x.id) >= 0);
